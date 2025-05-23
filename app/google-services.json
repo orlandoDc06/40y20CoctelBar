@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "540675848058",
+    "project_id": "y20-dee82",
+    "storage_bucket": "y20-dee82.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:540675848058:android:282f5c6bcc20d7090d48c3",
+        "android_client_info": {
+          "package_name": "com.example.a40y20coctelbar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrERWKz2eHMhW4gtVTcWRZBa-L8UbZmgw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

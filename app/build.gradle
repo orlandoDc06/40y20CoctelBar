@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.a40y20coctelbar"
-        minSdk 21
+        minSdk 34
         targetSdk 35
         versionCode 1
         versionName "1.0"
@@ -45,5 +45,9 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:33.14.0')
 
     implementation 'com.google.firebase:firebase-analytics'
+
+    //DEPENDECIAS DE ATENTICATION
+    implementation 'com.google.firebase:firebase-auth:22.3.0'
+
 
 }

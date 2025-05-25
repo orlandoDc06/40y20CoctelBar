@@ -13,12 +13,56 @@
         android:theme="@style/Theme._40y20CoctelBar"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".dialogsAdmin.AdministradorDialog"
+            android:exported="false" />
+        <activity
+            android:name=".dialogsAdmin.MeseroDialog"
+            android:exported="false" />
+        <activity
+            android:name=".dialogsAdmin.CocineroDialog"
+            android:exported="false" />
+        <activity
+            android:name=".OpcionesAdministrador.Reporte"
+            android:exported="false" />
+        <activity
+            android:name=".OpcionesAdministrador.ReglasNegocio"
+            android:exported="false" />
+        <activity
+            android:name=".OpcionesAdministrador.GestionarUsuarios"
+            android:exported="false" />
+        <activity
+            android:name=".Menus.MeseroMenu"
+            android:exported="false" />
+        <activity
+            android:name=".Menus.CocineroMenu"
+            android:exported="false" />
+        <activity
+            android:name=".Menus.AdministradorMenu"
+            android:exported="true">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name=".PantallaCarga"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
     </application>

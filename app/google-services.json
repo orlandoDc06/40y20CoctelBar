@@ -12,7 +12,20 @@
           "package_name": "com.example.a40y20coctelbar"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "540675848058-cc1tibtcic590gg2eceqt5ei53pnn25p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.a40y20coctelbar",
+            "certificate_hash": "482c0df6d604c788cb8925fc528a2fcdf74fd4a4"
+          }
+        },
+        {
+          "client_id": "540675848058-4r8brq7le1fo80ok2m94c6fpp8fm5dg9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCrERWKz2eHMhW4gtVTcWRZBa-L8UbZmgw"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "540675848058-4r8brq7le1fo80ok2m94c6fpp8fm5dg9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

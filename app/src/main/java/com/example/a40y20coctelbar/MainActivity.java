@@ -3,6 +3,8 @@ package com.example.a40y20coctelbar;
 import androidx.annotation.NonNull;
 import androidx.credentials.Credential;
 import androidx.credentials.CredentialManager;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CancellationSignal;
 import android.util.Log;
@@ -22,6 +24,8 @@ import androidx.credentials.GetCredentialRequest;
 import androidx.credentials.GetCredentialResponse;
 import androidx.credentials.exceptions.GetCredentialException;
 
+import com.example.a40y20coctelbar.Menus.AdministradorMenu;
+import com.example.a40y20coctelbar.OpcionesAdministrador.GestionarUsuarios;
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption;
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential;
 import com.google.firebase.auth.AuthCredential;
@@ -139,8 +143,9 @@ public class MainActivity extends AppCompatActivity {
                     FirebaseUser userLogeado = miAuth.getCurrentUser();
 
                     if (userLogeado != null  && userLogeado.isEmailVerified()){
-
-                        Toast.makeText(this, "Benvendio", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MainActivity.this, AdministradorMenu.class);
+                        startActivity(intent);
+                        Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show();
                     }
                     else {
                         Toast.makeText(this, "Debe verifiacar el correo", Toast.LENGTH_SHORT).show();

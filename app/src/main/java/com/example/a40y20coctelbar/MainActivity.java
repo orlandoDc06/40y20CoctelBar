@@ -70,8 +70,7 @@ public class MainActivity extends AppCompatActivity {
         btnCrear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // RegisterUser();
-                RegisterGoogle();
+               RegisterUser();
             }
         });
 
@@ -181,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(@NonNull GetCredentialException e) {
-                        Log.e("ERROR", e.getMessage());
+                        Log.e("ERROR", "Credential fetch failed: " + e.getMessage(), e);
                     }
                 }
         );

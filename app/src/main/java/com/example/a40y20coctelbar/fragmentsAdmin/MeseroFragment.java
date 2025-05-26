@@ -13,11 +13,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.a40y20coctelbar.R;
-import com.example.a40y20coctelbar.adapters.UsuarioAdapter;
+import com.example.a40y20coctelbar.adapters.UsuarioMeseroAdapter;
 import com.example.a40y20coctelbar.dialogsAdmin.MeseroDialog;
 import com.example.a40y20coctelbar.models.Usuario;
 import com.google.firebase.database.DataSnapshot;
@@ -37,8 +36,9 @@ public class MeseroFragment extends Fragment {
     private Button btnAbrirDialog;
 
     private RecyclerView recyclerMeseros;
-    private UsuarioAdapter usuarioAdapter;
+    private UsuarioMeseroAdapter usuarioMeseroAdapter;
     private List<Usuario> usuarioList;
+    private List<Usuario> meserosList; // Lista filtrada solo para meseros
     private DatabaseReference databaseReference;
 
     public static MeseroFragment newInstance() {
@@ -81,12 +81,8 @@ public class MeseroFragment extends Fragment {
         btnAbrirDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MeseroDialog dialog = new MeseroDialog();
-                dialog.show(requireActivity().getSupportFragmentManager(), "mesero");
             }
         });
-
-
     }
 
     private void setupRecyclerView() {
@@ -97,9 +93,10 @@ public class MeseroFragment extends Fragment {
         }
 
         usuarioList = new ArrayList<>();
-        usuarioAdapter = new UsuarioAdapter(usuarioList, getContext());
+        meserosList = new ArrayList<>(); // Lista filtrada para meseros
+        usuarioMeseroAdapter = new UsuarioMeseroAdapter(meserosList, getContext());
         recyclerMeseros.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerMeseros.setAdapter(usuarioAdapter);
+        recyclerMeseros.setAdapter(usuarioMeseroAdapter);
 
         Log.d(TAG, "RecyclerView configurado correctamente");
     }
@@ -113,12 +110,13 @@ public class MeseroFragment extends Fragment {
         databaseReference.child("usuarios").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (usuarioList == null) {
-                    Log.e(TAG, "usuarioList es null");
+                if (usuarioList == null || meserosList == null) {
+                    Log.e(TAG, "usuarioList o meserosList es null");
                     return;
                 }
 
                 usuarioList.clear();
+                meserosList.clear();
 
                 for (DataSnapshot usuarioSnapshot : dataSnapshot.getChildren()) {
                     try {
@@ -127,7 +125,12 @@ public class MeseroFragment extends Fragment {
                             // Guardar la clave del usuario (UID de Firebase Auth)
                             usuario.setKey(usuarioSnapshot.getKey());
                             usuarioList.add(usuario);
-                            Log.d(TAG, "Usuario cargado: " + usuario.getCorreo() + " - " + usuario.getNombre());
+
+                            // Filtrar solo los meseros
+                            if ("Mesero".equals(usuario.getRol())) {
+                                meserosList.add(usuario);
+                                Log.d(TAG, "Mesero cargado: " + usuario.getCorreo() + " - " + usuario.getNombre());
+                            }
                         }
                     } catch (Exception e) {
                         Log.e(TAG, "Error al procesar usuario: " + e.getMessage());
@@ -135,13 +138,14 @@ public class MeseroFragment extends Fragment {
                 }
 
                 // Notificar al adapter que los datos han cambiado
-                if (usuarioAdapter != null) {
-                    usuarioAdapter.notifyDataSetChanged();
+                if (usuarioMeseroAdapter != null) {
+                    usuarioMeseroAdapter.notifyDataSetChanged();
                 } else {
-                    Log.e(TAG, "usuarioAdapter es null");
+                    Log.e(TAG, "usuarioMeseroAdapter es null");
                 }
 
                 Log.d(TAG, "Total usuarios cargados: " + usuarioList.size());
+                Log.d(TAG, "Total meseros cargados: " + meserosList.size());
             }
 
             @Override

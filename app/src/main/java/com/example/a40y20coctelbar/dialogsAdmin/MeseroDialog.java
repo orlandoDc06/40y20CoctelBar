@@ -43,7 +43,6 @@ public class MeseroDialog extends DialogFragment {
     private Spinner spEditRol;
     private ImageView imgEditUsuario;
     private Button btnGuardarEdit, btnEditCancelar;
-
     private DatabaseReference databaseReference;
 
     // Constructor estático para crear el dialog con datos del usuario
@@ -105,7 +104,7 @@ public class MeseroDialog extends DialogFragment {
 
     private void setupSpinner() {
         // Crear array con los roles disponibles
-        String[] roles = {"Administrador", "Cajero", "Mesero"};
+        String[] roles = {"Administrador", "Cocinero", "Mesero"};
 
         // Crear adapter para el spinner
         ArrayAdapter<String> adapter = new ArrayAdapter<>(

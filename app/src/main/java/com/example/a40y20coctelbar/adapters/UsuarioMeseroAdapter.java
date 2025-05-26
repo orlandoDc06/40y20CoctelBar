@@ -25,28 +25,28 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
-public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.UsuarioViewHolder> {
+public class UsuarioMeseroAdapter extends RecyclerView.Adapter<UsuarioMeseroAdapter.UsuarioViewHolder> {
 
     private List<Usuario> usuarioList;
     private Context context;
 
-    public UsuarioAdapter(List<Usuario> usuarioList, Context context) {
+    public UsuarioMeseroAdapter(List<Usuario> usuarioList, Context context) {
         this.usuarioList = usuarioList;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public UsuarioAdapter.UsuarioViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public UsuarioMeseroAdapter.UsuarioViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_usuarios, parent, false);
         return new UsuarioViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull UsuarioAdapter.UsuarioViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull UsuarioMeseroAdapter.UsuarioViewHolder holder, int position) {
         Usuario usuario = usuarioList.get(position);
 
-        // Configurar nombre si no tiene nombre extraer del correo
+        // Configurar nombre si no tiene nombre se extrae del correo
         String nombreMostrar = usuario.getNombre();
         if (nombreMostrar == null || nombreMostrar.isEmpty()) {
             if (usuario.getCorreo() != null && !usuario.getCorreo().isEmpty()) {

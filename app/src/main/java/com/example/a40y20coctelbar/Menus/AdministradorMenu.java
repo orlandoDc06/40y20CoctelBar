@@ -14,7 +14,8 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.a40y20coctelbar.OpcionesAdministrador.GestionarUsuarios;
 import com.example.a40y20coctelbar.R;
 
-public class AdministradorMenu extends AppCompatActivity {
+public class
+AdministradorMenu extends AppCompatActivity {
 
     CardView gestionUsersCards;
 

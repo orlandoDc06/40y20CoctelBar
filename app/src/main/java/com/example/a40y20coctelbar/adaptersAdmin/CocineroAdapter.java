@@ -1,4 +1,4 @@
-package com.example.a40y20coctelbar.adapters;
+package com.example.a40y20coctelbar.adaptersAdmin;
 
 import android.app.AlertDialog;
 import android.content.Context;

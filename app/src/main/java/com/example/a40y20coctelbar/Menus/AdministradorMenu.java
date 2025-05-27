@@ -17,8 +17,7 @@ import com.example.a40y20coctelbar.OpcionesAdministrador.ReglasNegocio;
 import com.example.a40y20coctelbar.OpcionesAdministrador.Reporte;
 import com.example.a40y20coctelbar.R;
 
-public class
-AdministradorMenu extends AppCompatActivity {
+public class AdministradorMenu extends AppCompatActivity {
 
     CardView gestionUsersCards, menuProductsCard, reporteCard, visualizaReglasCard;
 

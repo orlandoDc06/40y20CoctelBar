@@ -16,7 +16,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.a40y20coctelbar.R;
-import com.example.a40y20coctelbar.adaptersAdmin.CocineroAdapter;
+import com.example.a40y20coctelbar.adaptersAdmin.PendienteAdapter;
 import com.example.a40y20coctelbar.models.Usuario;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,19 +28,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class CocineroFragment extends Fragment {
+public class PendientesFragment extends Fragment {
+
+
     View view;
-    private static final String TAG = "CocineroFragment";
-    private RecyclerView recyclerCocineros;
-    private CocineroAdapter cocineroAdapter;
+    private static final String TAG = "PendientesFragment";
+    private RecyclerView recyclerPendientes;
+    private PendienteAdapter pendienteAdapter;
     private List<Usuario> usuarioList;
-    private List<Usuario> cocineroList;
+    private List<Usuario> pendientesList;
     private DatabaseReference databaseReference;
 
-
-
-    public static CocineroFragment newInstance(String param1, String param2) {
-        CocineroFragment fragment = new CocineroFragment();
+    public static PendientesFragment newInstance(String param1, String param2) {
+        PendientesFragment fragment = new PendientesFragment();
         return fragment;
     }
 
@@ -48,28 +48,20 @@ public class CocineroFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        view = inflater.inflate(R.layout.admin_fragment_cocinero, container, false);
+        view = inflater.inflate(R.layout.admin_fragment_pendientes, container, false);
 
-        // Inicializar Firebase Database
         databaseReference = FirebaseDatabase.getInstance().getReference();
-
-        // Inicializar vistas
         initViews();
-
-        // Configurar RecyclerView
         setupRecyclerView();
-
-        // Cargar usuarios desde la base de datos
         cargarUsuarios();
 
         return view;
     }
 
     private void initViews() {
-        recyclerCocineros = view.findViewById(R.id.recyclerCocineros);
+        recyclerPendientes = view.findViewById(R.id.recyclerPendientes);
 
-        // Verificar que el RecyclerView existe
-        if (recyclerCocineros == null) {
+        if (recyclerPendientes == null) {
             Log.e(TAG, "RecyclerView no encontrado en el layout");
             Toast.makeText(getContext(), "Error: RecyclerView no encontrado", Toast.LENGTH_LONG).show();
             return;
@@ -78,17 +70,16 @@ public class CocineroFragment extends Fragment {
     }
 
     private void setupRecyclerView() {
-        // Verificar que el RecyclerView existe antes de configurarlo
-        if (recyclerCocineros == null) {
+        if (recyclerPendientes == null) {
             Log.e(TAG, "No se puede configurar RecyclerView porque es null");
             return;
         }
 
         usuarioList = new ArrayList<>();
-        cocineroList = new ArrayList<>(); // Lista filtrada para cocinero
-        cocineroAdapter = new CocineroAdapter(cocineroList, getContext());
-        recyclerCocineros.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerCocineros.setAdapter(cocineroAdapter);
+        pendientesList = new ArrayList<>();
+        pendienteAdapter = new PendienteAdapter(pendientesList, getContext());
+        recyclerPendientes.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerPendientes.setAdapter(pendienteAdapter);
 
         Log.d(TAG, "RecyclerView configurado correctamente");
     }
@@ -102,26 +93,24 @@ public class CocineroFragment extends Fragment {
         databaseReference.child("usuarios").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (usuarioList == null || cocineroList == null) {
+                if (usuarioList == null || pendientesList == null) {
                     Log.e(TAG, "usuarioList o CocineroList es null");
                     return;
                 }
 
                 usuarioList.clear();
-                cocineroList.clear();
+                pendientesList.clear();
 
                 for (DataSnapshot usuarioSnapshot : dataSnapshot.getChildren()) {
                     try {
                         Usuario usuario = usuarioSnapshot.getValue(Usuario.class);
                         if (usuario != null) {
-                            // Guardar la clave del usuario
                             usuario.setKey(usuarioSnapshot.getKey());
                             usuarioList.add(usuario);
-
                             // Filtrar solo los Cocinero
-                            if ("Cocinero".equals(usuario.getRol())) {
-                                cocineroList.add(usuario);
-                                Log.d(TAG, "Cocinero cargado: " + usuario.getCorreo() + " - " + usuario.getNombre());
+                            if ("Sin rol definido".equals(usuario.getRol())) {
+                                pendientesList.add(usuario);
+                                Log.d(TAG, "Pendiente cargado: " + usuario.getCorreo() + " - " + usuario.getNombre());
                             }
                         }
                     } catch (Exception e) {
@@ -130,14 +119,14 @@ public class CocineroFragment extends Fragment {
                 }
 
                 // Notificar al adapter que los datos han cambiado
-                if (cocineroAdapter != null) {
-                    cocineroAdapter.notifyDataSetChanged();
+                if (pendienteAdapter != null) {
+                    pendienteAdapter.notifyDataSetChanged();
                 } else {
-                    Log.e(TAG, "cocineroAdapter es null");
+                    Log.e(TAG, "pendienteAdapter es null");
                 }
 
                 Log.d(TAG, "Total usuarios cargados: " + usuarioList.size());
-                Log.d(TAG, "Total Cocinero cargados: " + cocineroList.size());
+                Log.d(TAG, "Total pendientes cargados: " + pendientesList.size());
             }
 
             @Override
@@ -150,4 +139,8 @@ public class CocineroFragment extends Fragment {
             }
         });
     }
+
+
+
+
 }

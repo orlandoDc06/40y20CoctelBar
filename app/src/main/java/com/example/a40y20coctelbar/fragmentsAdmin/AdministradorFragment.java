@@ -31,7 +31,6 @@ import java.util.List;
 public class AdministradorFragment extends Fragment {
 
     View view;
-    private Button btnAbrirDialog;
     private static final String TAG = "AdministradorFragment";
     private RecyclerView recyclerAdministradores;
     private AdministradorAdapter administradorAdapter;
@@ -65,7 +64,6 @@ public class AdministradorFragment extends Fragment {
         return view;
     }
     private void initViews() {
-        btnAbrirDialog = view.findViewById(R.id.btnAbrirNewAdministrador);
         recyclerAdministradores = view.findViewById(R.id.recyclerAdministradores);
 
         // Verificar que el RecyclerView existe
@@ -75,12 +73,6 @@ public class AdministradorFragment extends Fragment {
             return;
         }
 
-        // Configurar botón
-        btnAbrirDialog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
     }
 
     private void setupRecyclerView() {

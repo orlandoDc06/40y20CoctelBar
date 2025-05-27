@@ -17,6 +17,7 @@ import com.example.a40y20coctelbar.OpcionesAdministrador.ReglasNegocio;
 import com.example.a40y20coctelbar.OpcionesAdministrador.Reporte;
 import com.example.a40y20coctelbar.OpcionesMesero.CrearComanda;
 import com.example.a40y20coctelbar.OpcionesMesero.HistorialComanda;
+import com.example.a40y20coctelbar.OpcionesMesero.MenuComanda;
 import com.example.a40y20coctelbar.R;
 
 public class MeseroMenu extends AppCompatActivity {
@@ -52,7 +53,7 @@ public class MeseroMenu extends AppCompatActivity {
         verMenuCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MeseroMenu.this, MenuProductos.class);
+                Intent intent = new Intent(MeseroMenu.this, MenuComanda.class);
                 startActivity(intent);
             }
         });

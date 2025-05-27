@@ -18,7 +18,7 @@
             android:name=".SinRol"
             android:exported="false" />
         <activity
-            android:name=".OpcionesMesero.MenuProductos"
+            android:name=".OpcionesMesero.MenuComanda"
             android:exported="false" />
         <activity
             android:name=".OpcionesMesero.HistorialComanda"

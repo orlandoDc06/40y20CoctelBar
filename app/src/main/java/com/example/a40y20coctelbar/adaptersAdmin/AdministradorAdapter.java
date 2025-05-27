@@ -1,4 +1,4 @@
-package com.example.a40y20coctelbar.adapters;
+package com.example.a40y20coctelbar.adaptersAdmin;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.example.a40y20coctelbar.R;
 import com.example.a40y20coctelbar.dialogsAdmin.MeseroDialog;
@@ -25,25 +26,24 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
-public class UsuarioMeseroAdapter extends RecyclerView.Adapter<UsuarioMeseroAdapter.UsuarioViewHolder> {
-
+public class AdministradorAdapter extends RecyclerView.Adapter<AdministradorAdapter.AdministradorViewHolder> {
     private List<Usuario> usuarioList;
     private Context context;
 
-    public UsuarioMeseroAdapter(List<Usuario> usuarioList, Context context) {
+    public AdministradorAdapter(List<Usuario> usuarioList, Context context) {
         this.usuarioList = usuarioList;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public UsuarioMeseroAdapter.UsuarioViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdministradorAdapter.AdministradorViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_usuarios, parent, false);
-        return new UsuarioViewHolder(view);
+        return new AdministradorViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull UsuarioMeseroAdapter.UsuarioViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AdministradorAdapter.AdministradorViewHolder holder, int position) {
         Usuario usuario = usuarioList.get(position);
 
         // Configurar nombre si no tiene nombre se extrae del correo
@@ -92,7 +92,7 @@ public class UsuarioMeseroAdapter extends RecyclerView.Adapter<UsuarioMeseroAdap
             }
         });
 
-        // ELIMINAR USUARIO (opcional - puedes implementar esta funcionalidad también)
+        // ELIMINAR USUARIO
         holder.imgItemDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,7 +110,6 @@ public class UsuarioMeseroAdapter extends RecyclerView.Adapter<UsuarioMeseroAdap
                         .show();
             }
         });
-
     }
 
     private void eliminarUsuario(Usuario usuario, int position) {
@@ -139,13 +138,12 @@ public class UsuarioMeseroAdapter extends RecyclerView.Adapter<UsuarioMeseroAdap
         return usuarioList.size();
     }
 
-    public class UsuarioViewHolder extends RecyclerView.ViewHolder {
+    public class AdministradorViewHolder extends RecyclerView.ViewHolder {
         TextView lblItemNombre, lblItemRol;
         ImageView imgItemUsuario;
         ImageButton imgItemDelete, imgItemEdit;
-        public UsuarioViewHolder(@NonNull View itemView) {
+        public AdministradorViewHolder(@NonNull View itemView) {
             super(itemView);
-
             lblItemNombre = itemView.findViewById(R.id.lblItemNombre);
             lblItemRol = itemView.findViewById(R.id.lblItemRol);
             imgItemUsuario = itemView.findViewById(R.id.imgItemUsuario);

@@ -16,7 +16,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.a40y20coctelbar.R;
-import com.example.a40y20coctelbar.adapters.CocineroAdapter;
+import com.example.a40y20coctelbar.adaptersAdmin.CocineroAdapter;
 import com.example.a40y20coctelbar.models.Usuario;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

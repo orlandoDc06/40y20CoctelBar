@@ -15,6 +15,18 @@
         android:theme="@style/Theme._40y20CoctelBar"
         tools:targetApi="31">
         <activity
+            android:name=".SinRol"
+            android:exported="false" />
+        <activity
+            android:name=".OpcionesMesero.MenuProductos"
+            android:exported="false" />
+        <activity
+            android:name=".OpcionesMesero.HistorialComanda"
+            android:exported="false" />
+        <activity
+            android:name=".OpcionesMesero.CrearComanda"
+            android:exported="false" />
+        <activity
             android:name=".dialogsAdmin.MenuProductosDialog"
             android:exported="false" />
         <activity

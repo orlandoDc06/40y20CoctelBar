@@ -46,8 +46,8 @@ public class PendienteDialog extends DialogFragment {
     private DatabaseReference databaseReference;
 
     // Constructor estático para crear el dialog con datos del usuario
-    public static MeseroDialog newInstance(Usuario usuario) {
-        MeseroDialog fragment = new MeseroDialog();
+    public static PendienteDialog newInstance(Usuario usuario) {
+        PendienteDialog fragment = new PendienteDialog();
         Bundle args = new Bundle();
         args.putSerializable(ARG_USUARIO, usuario);
         fragment.setArguments(args);
@@ -61,7 +61,6 @@ public class PendienteDialog extends DialogFragment {
             usuario = (Usuario) getArguments().getSerializable(ARG_USUARIO);
         }
 
-        // Inicializar Firebase Database
         databaseReference = FirebaseDatabase.getInstance().getReference();
     }
 
@@ -84,7 +83,7 @@ public class PendienteDialog extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.admin_dialog_mesero, container, false);
+        View view = inflater.inflate(R.layout.admin_dialog_pendiente, container, false);
 
         initViews(view);
         setupSpinner();
@@ -103,10 +102,8 @@ public class PendienteDialog extends DialogFragment {
     }
 
     private void setupSpinner() {
-        // Crear array con los roles disponibles
         String[] roles = {"Administrador", "Cocinero", "Mesero"};
 
-        // Crear adapter para el spinner
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 getContext(),
                 android.R.layout.simple_spinner_item,
@@ -118,7 +115,6 @@ public class PendienteDialog extends DialogFragment {
 
     private void loadUserData() {
         if (usuario != null) {
-            // Cargar nombre
             String nombre = usuario.getNombre();
             if (nombre == null || nombre.isEmpty()) {
                 if (usuario.getCorreo() != null && !usuario.getCorreo().isEmpty()) {
@@ -130,7 +126,6 @@ public class PendienteDialog extends DialogFragment {
             txtEditNombreUsuario.setText(nombre);
             txtEditNombreUsuario.setHint("Nombre del usuario");
 
-            // Cargar rol en el spinner
             String rolUsuario = usuario.getRol();
             if (rolUsuario != null) {
                 ArrayAdapter<String> adapter = (ArrayAdapter<String>) spEditRol.getAdapter();
@@ -140,7 +135,6 @@ public class PendienteDialog extends DialogFragment {
                 }
             }
 
-            // Cargar imagen de perfil
             if (usuario.getPp() != null && !usuario.getPp().isEmpty()) {
                 Glide.with(this)
                         .load(usuario.getPp())

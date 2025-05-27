@@ -14,6 +14,7 @@ import com.example.a40y20coctelbar.R;
 import com.example.a40y20coctelbar.fragmentsAdmin.AdministradorFragment;
 import com.example.a40y20coctelbar.fragmentsAdmin.CocineroFragment;
 import com.example.a40y20coctelbar.fragmentsAdmin.MeseroFragment;
+import com.example.a40y20coctelbar.fragmentsAdmin.PendientesFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -45,6 +46,8 @@ public class GestionarUsuarios extends AppCompatActivity {
                     selectedFragment = new CocineroFragment();
                 } else if (itemId == R.id.nav_administradores) {
                     selectedFragment = new AdministradorFragment();
+                } else if (itemId == R.id.nav_pendientes) {
+                    selectedFragment = new PendientesFragment();
                 } else {
                     selectedFragment = new MeseroFragment();
                 }

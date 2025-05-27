@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -25,9 +26,12 @@ import androidx.credentials.GetCredentialResponse;
 import androidx.credentials.exceptions.GetCredentialException;
 
 import com.example.a40y20coctelbar.Menus.AdministradorMenu;
+import com.example.a40y20coctelbar.Menus.CocineroMenu;
+import com.example.a40y20coctelbar.Menus.MeseroMenu;
 import com.example.a40y20coctelbar.models.Usuario;
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption;
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -41,7 +45,8 @@ import java.util.concurrent.Executors;
 public class MainActivity extends AppCompatActivity {
 
     private EditText txtEmail, txtPassword;
-    private Button btnCrear, btnIniciar, btnCrearGoogle;
+    private TextView btnCrear;
+    private Button btnIniciar, btnCrearGoogle;
     private FirebaseAuth miAuth;
     private DatabaseReference databaseReference;
 
@@ -139,6 +144,35 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+//    private void IniciarSesion(){
+//        String email = txtEmail.getText().toString();
+//        String password = txtPassword.getText().toString();
+//
+//        if(email.isEmpty() || email.isBlank() || password.isBlank() || password.isEmpty()){
+//            Toast.makeText(this, "Debe rellenar todos los datos", Toast.LENGTH_SHORT).show();
+//        }
+//        else {
+//            miAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+//                if (task.isSuccessful()){
+//                    FirebaseUser userLogeado = miAuth.getCurrentUser();
+//
+//                    if (userLogeado != null  && userLogeado.isEmailVerified()){
+//
+//                        Intent intent = new Intent(MainActivity.this, AdministradorMenu.class);
+//                        startActivity(intent);
+//                        Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show();
+//                    }
+//                    else {
+//                        Toast.makeText(this, "Debe verifiacar el correo", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//                else {
+//                    System.out.println("Error inicio sesion" + task.getException().getMessage());
+//                }
+//            });
+//        }
+//    }
+
     private void IniciarSesion(){
         String email = txtEmail.getText().toString();
         String password = txtPassword.getText().toString();
@@ -151,22 +185,40 @@ public class MainActivity extends AppCompatActivity {
                 if (task.isSuccessful()){
                     FirebaseUser userLogeado = miAuth.getCurrentUser();
 
-                    if (userLogeado != null  && userLogeado.isEmailVerified()){
+                    if (userLogeado != null  && userLogeado.isEmailVerified()) {
+                        String userId = userLogeado.getUid();
 
-                        Intent intent = new Intent(MainActivity.this, AdministradorMenu.class);
-                        startActivity(intent);
-                        Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show();
+                        databaseReference.child("usuarios").child(userId).child("rol").get().addOnCompleteListener(taskRol -> {
+                            if (taskRol.isSuccessful()) {
+                                String rol = String.valueOf(taskRol.getResult().getValue());
+
+                                if (rol.equalsIgnoreCase("administrador")) {
+                                    startActivity(new Intent(MainActivity.this, AdministradorMenu.class));
+                                } else if (rol.equalsIgnoreCase("mesero")) {
+                                    startActivity(new Intent(MainActivity.this, MeseroMenu.class));
+                                } else if (rol.equalsIgnoreCase("cocinero")) {
+                                    startActivity(new Intent(MainActivity.this, CocineroMenu.class));
+                                } else {
+                                    startActivity(new Intent(MainActivity.this, SinRol.class));
+                                }
+                                Toast.makeText(this, "Bienvenido: " + rol, Toast.LENGTH_SHORT).show();
+
+                            } else {
+                                Toast.makeText(this, "Error al obtener el rol del usuario", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                     else {
-                        Toast.makeText(this, "Debe verifiacar el correo", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Debe verificar el correo", Toast.LENGTH_SHORT).show();
                     }
                 }
                 else {
-                    System.out.println("Error inicio sesion" + task.getException().getMessage());
+                    System.out.println("Error inicio sesión: " + task.getException().getMessage());
                 }
             });
         }
     }
+
 
     //REGISTRO CON GOOLE
     private void RegisterGoogle(){

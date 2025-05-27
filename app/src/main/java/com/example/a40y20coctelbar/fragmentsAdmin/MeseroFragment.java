@@ -32,7 +32,6 @@ public class MeseroFragment extends Fragment {
     private static final String TAG = "MeseroFragment";
 
     View view;
-    private Button btnAbrirDialog;
 
     private RecyclerView recyclerMeseros;
     private UsuarioMeseroAdapter usuarioMeseroAdapter;
@@ -66,7 +65,6 @@ public class MeseroFragment extends Fragment {
     }
 
     private void initViews() {
-        btnAbrirDialog = view.findViewById(R.id.btnAbrirNewMesero);
         recyclerMeseros = view.findViewById(R.id.recyclerMeseros);
 
         // Verificar que el RecyclerView existe
@@ -76,12 +74,6 @@ public class MeseroFragment extends Fragment {
             return;
         }
 
-        // Configurar botón
-        btnAbrirDialog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
     }
 
     private void setupRecyclerView() {

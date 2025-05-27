@@ -16,5 +16,10 @@
         android:icon="@drawable/admin"
         android:title="Administradores" />
 
+    <item
+        android:id="@+id/nav_pendientes"
+        android:icon="@drawable/admin"
+        android:title="Pendientes" />
+
 
 </menu>

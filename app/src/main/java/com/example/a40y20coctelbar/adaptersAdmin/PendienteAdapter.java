@@ -79,16 +79,15 @@ public class PendienteAdapter extends RecyclerView.Adapter<PendienteAdapter.Pend
             @Override
             public void onClick(View v) {
                 // Crear el dialog pasando los datos del usuario
-                //PendienteDialog dialog = PendienteDialog.newInstance(usuario);
+                PendienteDialog dialog = PendienteDialog.newInstance(usuario);
 
                 // Mostrar el dialog
                 if (context instanceof AppCompatActivity) {
-                    //dialog.show(((AppCompatActivity) context).getSupportFragmentManager(), "edit_usuario");
+                    dialog.show(((AppCompatActivity) context).getSupportFragmentManager(), "edit_usuario");
                 }
             }
         });
 
-        // ELIMINAR USUARIO (opcional - puedes implementar esta funcionalidad también)
         holder.imgItemDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

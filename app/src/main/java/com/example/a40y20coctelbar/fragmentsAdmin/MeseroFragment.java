@@ -77,11 +77,6 @@ public class MeseroFragment extends Fragment {
     }
 
     private void setupRecyclerView() {
-        // Verificar que el RecyclerView existe antes de configurarlo
-        if (recyclerMeseros == null) {
-            Log.e(TAG, "No se puede configurar RecyclerView porque es null");
-            return;
-        }
 
         usuarioList = new ArrayList<>();
         meserosList = new ArrayList<>(); // Lista filtrada para meseros
@@ -89,7 +84,6 @@ public class MeseroFragment extends Fragment {
         recyclerMeseros.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerMeseros.setAdapter(usuarioMeseroAdapter);
 
-        Log.d(TAG, "RecyclerView configurado correctamente");
     }
 
     private void cargarUsuarios() {
@@ -113,7 +107,7 @@ public class MeseroFragment extends Fragment {
                     try {
                         Usuario usuario = usuarioSnapshot.getValue(Usuario.class);
                         if (usuario != null) {
-                            // Guardar la clave del usuario (UID de Firebase Auth)
+                            // Guardar la clave del usuario
                             usuario.setKey(usuarioSnapshot.getKey());
                             usuarioList.add(usuario);
 

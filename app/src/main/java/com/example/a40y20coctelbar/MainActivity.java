@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
 
                     if (userCreate != null){
                         // Guardar usuario en la base de datos
-                        guardarUsuarioEnBaseDatos(userCreate, "Administrador"); // Rol por defecto
+                        guardarUsuarioEnBaseDatos(userCreate, "Sin rol definido"); // Rol por defecto
 
                         userCreate.sendEmailVerification().addOnCompleteListener(task1 -> {
                             if (task1.isSuccessful()){
@@ -152,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
                     FirebaseUser userLogeado = miAuth.getCurrentUser();
 
                     if (userLogeado != null  && userLogeado.isEmailVerified()){
+
                         Intent intent = new Intent(MainActivity.this, AdministradorMenu.class);
                         startActivity(intent);
                         Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show();
@@ -217,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
                         FirebaseUser user = miAuth.getCurrentUser();
                         if (user != null) {
                             // Guardar usuario de Google en la base de datos
-                            guardarUsuarioEnBaseDatos(user, "Administrador");
+                            guardarUsuarioEnBaseDatos(user, "Sin rol definido");
 
                             // Ir directamente al menú principal (Google no requiere verificación)
                             Intent intent = new Intent(MainActivity.this, AdministradorMenu.class);

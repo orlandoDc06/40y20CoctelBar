@@ -5,78 +5,45 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".dialogsAdmin.MenuProductosDialog">
+    tools:context=".dialogsAdmin.MenuProductosDialog"
+    android:layout_margin="20dp"
+    >
 
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:gravity="center"
-        android:text="Nuevo Platillo"
-        android:textColor="@color/vino"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="16dp" />
 
     <ImageView
         android:id="@+id/imgFotoPlatillo"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_gravity="center"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="88dp"
         android:background="@drawable/ic_launcher_background"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btnSeleccionarImagen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="36dp"
-        android:backgroundTint="@color/vino"
-        android:text="Seleccionar Imagen"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgFotoPlatillo" />
-
-    <EditText
-        android:id="@+id/etNombrePlatillo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="364dp"
-        android:hint="Nombre del platillo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/etPrecioPlatillo"
+    <TextView
+        android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:hint="Precio"
-        android:inputType="numberDecimal"
-        app:layout_constraintTop_toBottomOf="@+id/etDescripcionPlatillo"
-        tools:layout_editor_absoluteX="0dp" />
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:text="Nuevo Platillo"
+        android:textColor="@color/vino"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="20dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="652dp"
+        android:layout_marginTop="636dp"
         android:gravity="end"
         android:orientation="horizontal"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp">
+        tools:layout_editor_absoluteX="20dp">
 
         <Button
             android:id="@+id/btnCancelar"
@@ -98,25 +65,61 @@
     </LinearLayout>
 
     <EditText
-        android:id="@+id/etDescripcionPlatillo"
+        android:id="@+id/etNombrePlatillo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="428dp"
-        android:hint="Descripción del platillo"
-        android:minLines="2"
+        android:layout_marginTop="348dp"
+        android:hint="Nombre del platillo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/spCategoriaProducto"
-        android:layout_width="409dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="592dp"
+        android:layout_marginTop="576dp"
         android:layout_marginEnd="2dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etDescripcionPlatillo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="412dp"
+        android:hint="Descripción del platillo"
+        android:minLines="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etPrecioPlatillo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:hint="Precio"
+        android:inputType="numberDecimal"
+        app:layout_constraintTop_toBottomOf="@+id/etDescripcionPlatillo"
+        tools:layout_editor_absoluteX="20dp" />
+
+    <Button
+        android:id="@+id/btnSeleccionarImagen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="@color/vino"
+        android:text="Seleccionar Imagen"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgFotoPlatillo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

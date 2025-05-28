@@ -15,6 +15,9 @@
         android:theme="@style/Theme._40y20CoctelBar"
         tools:targetApi="31">
         <activity
+            android:name=".dialogsCocinero.EditarComandaDialog"
+            android:exported="false" />
+        <activity
             android:name=".SinRol"
             android:exported="false" />
         <activity

@@ -57,8 +57,19 @@ public void onBindViewHolder(@NonNull CarritoViewHolder holder, int position) {
             .placeholder(R.drawable.ic_launcher_background)
             .into(holder.imgProducto);
 
-    holder.btnEditar.setOnClickListener(v -> listener.onEditar(position));
-    holder.btnEliminar.setOnClickListener(v -> listener.onEliminar(position));
+    holder.btnEditar.setOnClickListener(v -> {
+        int pos = holder.getAdapterPosition();
+        if (pos != RecyclerView.NO_POSITION) {
+            listener.onEditar(pos);
+        }
+    });
+
+    holder.btnEliminar.setOnClickListener(v -> {
+        int pos = holder.getAdapterPosition();
+        if (pos != RecyclerView.NO_POSITION) {
+            listener.onEliminar(pos);
+        }
+    });
 }
 
 @Override

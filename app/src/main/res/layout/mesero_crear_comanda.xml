@@ -6,27 +6,78 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="20dp"
     tools:context=".OpcionesMesero.CrearComanda">
 
-
-    <EditText
-        android:id="@+id/etNombreCliente"
-        android:hint="Nombre del Cliente"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
     <TextView
-        android:id="@+id/tvTotalPagar"
-        android:text="Total: $0.00"
-        android:textSize="18sp"
+        android:id="@+id/lblTitulo"
+        android:text="Nueva Orden"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="@color/vino"
         android:layout_marginTop="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/clienteLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="20dp"
+        android:hint="Nombre cliente"
+        app:startIconDrawable="@android:drawable/ic_input_get"
+        app:boxStrokeColor="@color/vino"
+        app:hintTextColor="@color/vino">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etNombreCliente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:autofillHints="emailAddress" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_carritoCompras"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/lblTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total:"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvTotalPagar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$0.00"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <Button
         android:id="@+id/btnFinalizarComanda"
-        android:text="Crear Comanda"
-        android:layout_marginTop="24dp"
+        android:text="Enviar a cocina"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/vino"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

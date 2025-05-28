@@ -1,14 +1,6 @@
 package com.example.a40y20coctelbar;
 
-import androidx.annotation.NonNull;
-import androidx.credentials.Credential;
-import androidx.credentials.CredentialManager;
-
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.CancellationSignal;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -19,41 +11,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.credentials.CredentialManagerCallback;
-import androidx.credentials.CustomCredential;
-import androidx.credentials.GetCredentialRequest;
-import androidx.credentials.GetCredentialResponse;
-import androidx.credentials.exceptions.GetCredentialException;
 
-import com.example.a40y20coctelbar.Menus.AdministradorMenu;
-import com.example.a40y20coctelbar.Menus.CocineroMenu;
-import com.example.a40y20coctelbar.Menus.MeseroMenu;
-import com.example.a40y20coctelbar.models.Usuario;
-import com.google.android.libraries.identity.googleid.GetGoogleIdOption;
-import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential;
-import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.a40y20coctelbar.utils.AuthManager;
+import com.example.a40y20coctelbar.utils.NavigationManager;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AuthManager.CallbackAutenticacion {
 
     private EditText txtEmail, txtPassword;
     private TextView btnCrear;
     private Button btnIniciar, btnCrearGoogle;
-    private FirebaseAuth miAuth;
-    private DatabaseReference databaseReference;
-
-    //CLASES PARA GOOGLE
-    private CredentialManager credentialManager;
-    private static final int RC_SING_IN = 2001;
-    private static final String TAG = "MainActivity";
+    private AuthManager authManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,293 +33,81 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        AsociarElementosXml();
+
+        configurarWindowInsets();
+        inicializarVistas();
+        inicializarAuthManager();
+        configurarEventListeners();
         verificarSesionActiva();
     }
-    private void verificarSesionActiva() {
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        if (currentUser != null) {
-            boolean esGoogle = currentUser.getProviderData().get(1).getProviderId().equals("google.com");
-            if (currentUser.isEmailVerified() || esGoogle) {
-                String userId = currentUser.getUid();
-                databaseReference.child("usuarios").child(userId).child("rol").get().addOnCompleteListener(taskRol -> {
-                    if (taskRol.isSuccessful()) {
-                        String rol = String.valueOf(taskRol.getResult().getValue());
-
-                        if (rol.equalsIgnoreCase("administrador")) {
-                            startActivity(new Intent(MainActivity.this, AdministradorMenu.class));
-                        } else if (rol.equalsIgnoreCase("mesero")) {
-                            startActivity(new Intent(MainActivity.this, MeseroMenu.class));
-                        } else if (rol.equalsIgnoreCase("cocinero")) {
-                            startActivity(new Intent(MainActivity.this, CocineroMenu.class));
-                        } else {
-                            startActivity(new Intent(MainActivity.this, SinRol.class));
-                        }
-                        finish(); // para evitar que vuelva atrás
-                    }
-                });
-            }
-        }
+    private void configurarWindowInsets() {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
     }
 
-
-    private void AsociarElementosXml(){
-        credentialManager = CredentialManager.create(getBaseContext());
-
+    private void inicializarVistas() {
         txtEmail = findViewById(R.id.txtEmail);
         txtPassword = findViewById(R.id.txtPassword);
         btnCrear = findViewById(R.id.btnCrear);
         btnIniciar = findViewById(R.id.btnIniciar);
         btnCrearGoogle = findViewById(R.id.btnCrearGoogle);
-        miAuth = FirebaseAuth.getInstance();
-
-        // Inicializar Database Reference
-        databaseReference = FirebaseDatabase.getInstance().getReference();
-
-        //Evento registrar users
-        btnCrear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                RegisterUser();
-            }
-        });
-
-        // EVENTO INICIAR SESION
-        btnIniciar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                IniciarSesion();
-            }
-        });
-
-        //REGISTRARSE CON GOOGLE
-        btnCrearGoogle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                RegisterGoogle();
-            }
-        });
-
-        if (miAuth.getCurrentUser() != null){
-            Toast.makeText(this, "El usuario ya inicio sesion", Toast.LENGTH_SHORT).show();
-        }
     }
 
-    private void RegisterUser(){
-        String email = txtEmail.getText().toString();
-        String password = txtPassword.getText().toString();
-
-        if(email.isEmpty() || email.isBlank() || password.isBlank() || password.isEmpty()){
-            Toast.makeText(this, "Debe rellenar todos los datos", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            miAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-                if(task.isSuccessful()){
-                    FirebaseUser userCreate = miAuth.getCurrentUser();
-
-                    if (userCreate != null){
-                        // Guardar usuario en la base de datos
-                        guardarUsuarioEnBaseDatos(userCreate, "Sin rol definido"); // Rol por defecto
-
-                        userCreate.sendEmailVerification().addOnCompleteListener(task1 -> {
-                            if (task1.isSuccessful()){
-                                Toast.makeText(this, "Se envio un correo de verificacion", Toast.LENGTH_SHORT).show();
-                            }
-                            else {
-                                Toast.makeText(this, "Fallo el envio", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                    Toast.makeText(this, "Usuario creado correctamente", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    System.out.println("Fallo en la creacion" + task.getException().getMessage());
-                }
-            });
-        }
+    private void inicializarAuthManager() {
+        authManager = new AuthManager(this, this);
     }
 
-//    private void IniciarSesion(){
-//        String email = txtEmail.getText().toString();
-//        String password = txtPassword.getText().toString();
-//
-//        if(email.isEmpty() || email.isBlank() || password.isBlank() || password.isEmpty()){
-//            Toast.makeText(this, "Debe rellenar todos los datos", Toast.LENGTH_SHORT).show();
-//        }
-//        else {
-//            miAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-//                if (task.isSuccessful()){
-//                    FirebaseUser userLogeado = miAuth.getCurrentUser();
-//
-//                    if (userLogeado != null  && userLogeado.isEmailVerified()){
-//
-//                        Intent intent = new Intent(MainActivity.this, AdministradorMenu.class);
-//                        startActivity(intent);
-//                        Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show();
-//                    }
-//                    else {
-//                        Toast.makeText(this, "Debe verifiacar el correo", Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//                else {
-//                    System.out.println("Error inicio sesion" + task.getException().getMessage());
-//                }
-//            });
-//        }
-//    }
-
-    private void IniciarSesion(){
-        String email = txtEmail.getText().toString();
-        String password = txtPassword.getText().toString();
-
-        if(email.isEmpty() || email.isBlank() || password.isBlank() || password.isEmpty()){
-            Toast.makeText(this, "Debe rellenar todos los datos", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            miAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-                if (task.isSuccessful()){
-                    FirebaseUser userLogeado = miAuth.getCurrentUser();
-
-                    if (userLogeado != null  && userLogeado.isEmailVerified()) {
-                        String userId = userLogeado.getUid();
-
-                        databaseReference.child("usuarios").child(userId).child("rol").get().addOnCompleteListener(taskRol -> {
-                            if (taskRol.isSuccessful()) {
-                                String rol = String.valueOf(taskRol.getResult().getValue());
-
-                                if (rol.equalsIgnoreCase("administrador")) {
-                                    startActivity(new Intent(MainActivity.this, AdministradorMenu.class));
-                                } else if (rol.equalsIgnoreCase("mesero")) {
-                                    startActivity(new Intent(MainActivity.this, MeseroMenu.class));
-                                } else if (rol.equalsIgnoreCase("cocinero")) {
-                                    startActivity(new Intent(MainActivity.this, CocineroMenu.class));
-                                } else {
-                                    startActivity(new Intent(MainActivity.this, SinRol.class));
-                                }
-                                Toast.makeText(this, "Bienvenido: " + rol, Toast.LENGTH_SHORT).show();
-
-                            } else {
-                                Toast.makeText(this, "Error al obtener el rol del usuario", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                    else {
-                        Toast.makeText(this, "Debe verificar el correo", Toast.LENGTH_SHORT).show();
-                    }
-                }
-                else {
-                    System.out.println("Error inicio sesión: " + task.getException().getMessage());
-                }
-            });
-        }
+    private void configurarEventListeners() {
+        btnCrear.setOnClickListener(v -> registrarUsuario());
+        btnIniciar.setOnClickListener(v -> iniciarSesionUsuario());
+        btnCrearGoogle.setOnClickListener(v -> iniciarSesionConGoogle());
     }
 
-
-    //REGISTRO CON GOOLE
-    private void RegisterGoogle(){
-        GetGoogleIdOption getGoogleIdOption = new GetGoogleIdOption
-                .Builder()
-                .setFilterByAuthorizedAccounts(false)
-                .setServerClientId("540675848058-4r8brq7le1fo80ok2m94c6fpp8fm5dg9.apps.googleusercontent.com")
-                .build();
-
-        GetCredentialRequest request = new GetCredentialRequest
-                .Builder()
-                .addCredentialOption(getGoogleIdOption)
-                .build();
-
-        credentialManager.getCredentialAsync(
-                getBaseContext(),
-                request,
-                new CancellationSignal(),
-                Executors.newSingleThreadExecutor(),
-                new CredentialManagerCallback<GetCredentialResponse, GetCredentialException>() {
-                    @Override
-                    public void onResult(GetCredentialResponse getCredentialResponse) {
-                        handleSignIn(getCredentialResponse.getCredential());
-                    }
-
-                    @Override
-                    public void onError(@NonNull GetCredentialException e) {
-                        Log.e("ERROR", "Credential fetch failed: " + e.getMessage(), e);
-                    }
-                }
-        );
+    private void verificarSesionActiva() {
+        authManager.verificarSesionActiva();
     }
 
-    private void handleSignIn(Credential credential) {
-        if(credential instanceof CustomCredential){
-            CustomCredential customCredential = (CustomCredential) credential;
-            Bundle credientialData = customCredential.getData();
-            GoogleIdTokenCredential googleIdTokenCredential = GoogleIdTokenCredential.createFrom(credientialData);
-            firebaseAuthWhitGoogle(googleIdTokenCredential.getIdToken());
-        }
+    private void registrarUsuario() {
+        String email = txtEmail.getText().toString().trim();
+        String password = txtPassword.getText().toString().trim();
+        authManager.registrarConEmailYPassword(email, password);
     }
 
-    private void firebaseAuthWhitGoogle(String idToken) {
-        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-        miAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, task -> {
-                    if(task.isSuccessful()){
-                        Log.d("EXITO","USUARIO REGISTRADO");
-                        FirebaseUser user = miAuth.getCurrentUser();
-                        if (user != null) {
-                            // Guardar usuario
-                            guardarUsuarioEnBaseDatos(user, "Sin rol definido");
-
-                            // Ir directamente al menú principal
-                            Intent intent = new Intent(MainActivity.this, AdministradorMenu.class);
-                            startActivity(intent);
-                            Toast.makeText(this, "Bienvenido " + user.getDisplayName(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    else{
-                        Log.w("ERROR", "Fallo la creacion del usuario");
-                    }
-                });
+    private void iniciarSesionUsuario() {
+        String email = txtEmail.getText().toString().trim();
+        String password = txtPassword.getText().toString().trim();
+        authManager.iniciarSesionConEmailYPassword(email, password);
     }
 
-    private void guardarUsuarioEnBaseDatos(FirebaseUser firebaseUser, String rol) {
-        if (firebaseUser == null) {
-            Log.e(TAG, "FirebaseUser es null, no se puede guardar");
-            return;
-        }
+    private void iniciarSesionConGoogle() {
+        authManager.iniciarSesionConGoogle();
+    }
 
-        // Crear objeto Usuario
-        Usuario usuario = new Usuario();
-        usuario.setCorreo(firebaseUser.getEmail());
+    // Implementación de AuthManager.CallbackAutenticacion
+    @Override
+    public void alExitoAutenticacion(FirebaseUser user, String rol) {
+        NavigationManager.navegarSegunRol(this, user, rol);
+        NavigationManager.finalizarActivityActual(this);
+    }
 
-        // Establecer nombre
-        String nombre = firebaseUser.getDisplayName();
-        if (nombre == null || nombre.isEmpty()) {
-            if (firebaseUser.getEmail() != null) {
-                // Extraer nombre del correo
-                nombre = firebaseUser.getEmail().substring(0, firebaseUser.getEmail().indexOf("@"));
-            } else {
-                nombre = "Usuario";
-            }
-        }
-        usuario.setNombre(nombre);
+    @Override
+    public void alErrorAutenticacion(String error) {
+        Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
+    }
 
-        // Establecer foto de perfil
-        if (firebaseUser.getPhotoUrl() != null) {
-            usuario.setPp(firebaseUser.getPhotoUrl().toString());
-        } else {
-            usuario.setPp("");
-        }
+    @Override
+    public void alEnviarVerificacionEmail() {
+        Toast.makeText(this, "Se envió un correo de verificación", Toast.LENGTH_SHORT).show();
+    }
 
-        // Establecer rol
-        usuario.setRol(rol);
-
-        // Guardar
-        String userId = firebaseUser.getUid();
-        databaseReference.child("usuarios").child(userId).setValue(usuario)
-                .addOnSuccessListener(aVoid -> {
-                    Log.d(TAG, "Usuario guardado exitosamente en la base de datos: " + usuario.getCorreo());
-                })
-                .addOnFailureListener(e -> {
-                    Log.e(TAG, "Error al guardar usuario en la base de datos: " + e.getMessage());
-                });
+    @Override
+    public void alCancelarAutenticacion() {
+        // Este método se llama cuando el usuario cancela la autenticación con Google
+        // Puedes mostrar un mensaje o simplemente no hacer nada
+        Toast.makeText(this, "Autenticación cancelada", Toast.LENGTH_SHORT).show();
     }
 }

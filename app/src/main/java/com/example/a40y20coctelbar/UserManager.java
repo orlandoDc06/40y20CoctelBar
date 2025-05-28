@@ -1,4 +1,4 @@
-package com.example.a40y20coctelbar.utils;
+package com.example.a40y20coctelbar;
 
 
 import android.util.Log;

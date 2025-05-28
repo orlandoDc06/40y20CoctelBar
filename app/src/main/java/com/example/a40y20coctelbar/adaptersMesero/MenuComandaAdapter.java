@@ -29,11 +29,23 @@ public class MenuComandaAdapter extends RecyclerView.Adapter<MenuComandaAdapter.
     private DatabaseReference databaseReference;
     private StorageReference storageReference;
 
+    public interface OnProductoAgregarListener {
+        void onAgregarClick(Menu menu);
+    }
+
+    private OnProductoAgregarListener listener;
+
     public MenuComandaAdapter(Context context, List<Menu> menuList) {
         this.context = context;
         this.menuList = menuList;
         this.databaseReference = FirebaseDatabase.getInstance().getReference();
         this.storageReference = FirebaseStorage.getInstance().getReference();
+    }
+
+    public MenuComandaAdapter(Context context, List<Menu> menuList, OnProductoAgregarListener listener) {
+        this.context = context;
+        this.menuList = menuList;
+        this.listener = listener;
     }
 
     @NonNull
@@ -63,10 +75,9 @@ public class MenuComandaAdapter extends RecyclerView.Adapter<MenuComandaAdapter.
             holder.imagen.setImageResource(R.drawable.ic_launcher_background);
         }
 
-        holder.btnAgregar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
+        holder.btnAgregar.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onAgregarClick(menuList.get(position));
             }
         });
 

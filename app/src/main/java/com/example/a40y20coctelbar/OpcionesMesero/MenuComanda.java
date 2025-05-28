@@ -1,5 +1,6 @@
 package com.example.a40y20coctelbar.OpcionesMesero;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -23,7 +24,9 @@ import com.example.a40y20coctelbar.OpcionesAdministrador.MenuProductos;
 import com.example.a40y20coctelbar.R;
 import com.example.a40y20coctelbar.adaptersAdmin.MenuAdapter;
 import com.example.a40y20coctelbar.adaptersMesero.MenuComandaAdapter;
+import com.example.a40y20coctelbar.models.CarritoComandaTemporal;
 import com.example.a40y20coctelbar.models.Menu;
+import com.example.a40y20coctelbar.models.ProductosComanda;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -78,7 +81,12 @@ public class MenuComanda extends AppCompatActivity {
 
     private void setupRecyclerView() {
         menuList = new ArrayList<>();
-        menuComandaAdapter = new MenuComandaAdapter(MenuComanda.this, menuList);
+        menuComandaAdapter = new MenuComandaAdapter(MenuComanda.this, menuList, new MenuComandaAdapter.OnProductoAgregarListener() {
+            @Override
+            public void onAgregarClick(Menu menu) {
+                mostrarDialogoAgregar(menu);
+            }
+        });
         rvLista.setLayoutManager(new GridLayoutManager(this, 1));
         rvLista.setAdapter(menuComandaAdapter);
     }
@@ -114,6 +122,37 @@ public class MenuComanda extends AppCompatActivity {
 
         databaseReference.child("platillos").addValueEventListener(menuValueEventListener);
     }
+
+    private void mostrarDialogoAgregar(Menu menu) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Agregar producto");
+
+        View dialogView = getLayoutInflater().inflate(R.layout.mesero_dialog_agregar_producto, null);
+        builder.setView(dialogView);
+
+        EditText etCantidad = dialogView.findViewById(R.id.etCantidad);
+        EditText etNota = dialogView.findViewById(R.id.etNota);
+
+        builder.setPositiveButton("Agregar", (dialog, which) -> {
+            String cantidadStr = etCantidad.getText().toString();
+            String nota = etNota.getText().toString();
+
+            if (!cantidadStr.isEmpty()) {
+                int cantidad = Integer.parseInt(cantidadStr);
+                ProductosComanda producto = new ProductosComanda(menu, cantidad, nota);
+                CarritoComandaTemporal.agregarProducto(producto);
+                System.out.println(CarritoComandaTemporal.getListaProductos());
+                Toast.makeText(this, "Producto agregado al carrito", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Ingrese una cantidad válida", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        builder.setNegativeButton("Cancelar", null);
+
+        builder.create().show();
+    }
+
 
     public void onCategoriaClick(View view) {
         if (view instanceof LinearLayout) {

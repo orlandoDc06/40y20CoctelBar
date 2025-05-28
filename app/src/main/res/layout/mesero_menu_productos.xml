@@ -5,6 +5,134 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OpcionesMesero.MenuProductos">
+    tools:context=".OpcionesMesero.MenuComanda">
+
+    <EditText
+        android:id="@+id/etBuscador"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:hint="Buscar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <HorizontalScrollView
+        android:id="@+id/HSVcategorias"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:padding="8dp"
+        android:scrollbars="none"
+        app:layout_constraintTop_toBottomOf="@+id/etBuscador"
+        app:layout_constraintBottom_toTopOf="@+id/rvListaMenuComandas"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:id="@+id/llCategorias"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginEnd="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@color/blanco"
+                android:onClick="onCategoriaClick">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/admin" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Todo"
+                    android:tag="Todo"
+                    android:gravity="center" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@color/blanco"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:onClick="onCategoriaClick"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imgBoquitas"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:contentDescription="Sodas"
+                    android:src="@drawable/boquitas" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:tag="Boquitas"
+                    android:text="Boquitas" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:background="@color/blanco"
+                android:onClick="onCategoriaClick"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imgCocteles"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:contentDescription="Cocteles"
+                    android:src="@drawable/admin" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:tag="Cocteles"
+                    android:text="Cocteles" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+
+<!--    <Button-->
+<!--        android:id="@+id/btnCategoria"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="prueba"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/etBuscador"/>-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvListaMenuComandas"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/HSVcategorias" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,7 +8,6 @@ public class Usuario implements Serializable {
     private String pp;
     private String rol;
     private String key;
-    private String fcmToken;
 
     public Usuario() {
 
@@ -22,14 +21,6 @@ public class Usuario implements Serializable {
         this.key = key;
     }
 
-    public Usuario(String correo, String nombre, String pp, String rol, String key, String fcmToken) {
-        this.correo = correo;
-        this.nombre = nombre;
-        this.pp = pp;
-        this.rol = rol;
-        this.key = key;
-        this.fcmToken = fcmToken;
-    }
 
     public String getKey() {
         return key;

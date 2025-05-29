@@ -53,7 +53,7 @@ public class NavigationManager {
         Intent intent = new Intent(context, rolUsuario.getClaseActivity());
         context.startActivity(intent);
 
-        // Mostrar mensaje de bienvenida
+
         String mensajeBienvenida = crearMensajeBienvenida(user, rolUsuario);
         Toast.makeText(context, mensajeBienvenida, Toast.LENGTH_SHORT).show();
     }

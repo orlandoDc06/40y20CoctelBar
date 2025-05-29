@@ -33,7 +33,7 @@ public class UserManager {
                     Log.d(TAG, "Usuario guardado exitosamente: " + usuario.getCorreo());
                 })
                 .addOnFailureListener(e -> {
-                    Log.e(TAG, "Error al guardar usuario: " + e.getMessage());
+                    Log.e(TAG, "Error al guardar : " + e.getMessage());
                 });
     }
 

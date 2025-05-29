@@ -49,25 +49,30 @@
                     android:textColor="@android:color/white" />
 
                 <TextView
-                    android:id="@+id/lblEstadoComanda"
+                    android:id="@+id/lblTotalComanda"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Estado: Pendiente"
+                    android:text="Total: $122.98"
                     android:textSize="14sp"
                     android:textStyle="bold"
+                    android:gravity=""
                     android:textColor="@android:color/white" />
+
 
             </LinearLayout>
 
             <TextView
-                android:id="@+id/lblTotalComanda"
-                android:layout_width="match_parent"
+                android:id="@+id/lblEstadoComanda"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total: $122.98"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:gravity=""
-                android:textColor="@android:color/white" />
+                android:layout_gravity="center"
+                android:background="@color/oro"
+                android:textColor="@color/white"
+                android:text="Estado: Pendiente"
+                android:layout_marginBottom="5dp"
+                android:padding="5dp"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
 
         </LinearLayout>
 

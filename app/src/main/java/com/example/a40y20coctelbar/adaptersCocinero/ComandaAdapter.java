@@ -1,6 +1,7 @@
 package com.example.a40y20coctelbar.adaptersCocinero;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -53,6 +54,15 @@ public class ComandaAdapter extends RecyclerView.Adapter<ComandaAdapter.ComandaV
         holder.lblNombreCliente.setText("Cliente: " + comanda.getNombreCliente());
         holder.lblFechaComanda.setText("Fecha: " + comanda.getFecha());
         holder.lblEstadoComanda.setText("Estado: " + comanda.getEstadoComanda());
+
+        if (comanda.getEstadoComanda().equalsIgnoreCase("en preparación")) {
+            holder.lblEstadoComanda.setBackgroundResource(R.color.oro);
+        } else if (comanda.getEstadoComanda().equalsIgnoreCase("pendiente")) {
+            holder.lblEstadoComanda.setBackgroundColor(Color.parseColor("#4CAF50"));
+        } else {
+            holder.lblEstadoComanda.setBackgroundColor(Color.RED);
+        }
+
         holder.lblTotalComanda.setText("Total: $" + comanda.getTotalPagar());
 
         holder.containerProductos.removeAllViews();

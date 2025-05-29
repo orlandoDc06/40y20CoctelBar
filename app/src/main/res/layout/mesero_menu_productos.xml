@@ -7,24 +7,51 @@
     android:layout_height="match_parent"
     tools:context=".OpcionesMesero.MenuComanda">
 
-    <EditText
-        android:id="@+id/etBuscador"
+    <View
+        android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:hint="Buscar"
+        android:layout_height="100dp"
+        android:background="?attr/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilBuscador"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="14dp"
+        app:boxBackgroundColor="@android:color/white"
+        app:boxCornerRadiusBottomEnd="20dp"
+        app:boxCornerRadiusBottomStart="20dp"
+        app:boxCornerRadiusTopEnd="20dp"
+        app:boxCornerRadiusTopStart="20dp"
+        app:endIconMode="clear_text"
+        app:layout_constraintEnd_toStartOf="@+id/view"
+        app:layout_constraintStart_toEndOf="@+id/view"
+        app:layout_constraintTop_toTopOf="parent"
+        app:startIconDrawable="@drawable/lupa">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etBuscador"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:textColor="@android:color/black" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <HorizontalScrollView
         android:id="@+id/HSVcategorias"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:padding="8dp"
+        android:layout_margin="5dp"
+        android:padding="5dp"
         android:scrollbars="none"
-        app:layout_constraintTop_toBottomOf="@+id/etBuscador"
+        app:layout_constraintTop_toBottomOf="@+id/view"
         app:layout_constraintBottom_toTopOf="@+id/rvListaMenuComandas"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -36,35 +63,168 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:orientation="vertical"
                 android:gravity="center"
                 android:layout_marginEnd="8dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:background="@color/blanco"
+                android:background="@color/vinoSuave"
                 android:onClick="onCategoriaClick">
 
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/admin" />
+                    android:src="@drawable/all" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="?attr/colorPrimary"
                     android:text="Todo"
                     android:tag="Todo"
                     android:gravity="center" />
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:background="@color/vinoSuave"
+                android:onClick="onCategoriaClick"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imgSodas"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/soda" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/colorPrimary"
+                    android:gravity="center"
+                    android:tag="Sodas"
+                    android:text="Sodas" />
+            </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginEnd="8dp"
-                android:background="@color/blanco"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:background="@color/vinoSuave"
+                android:onClick="onCategoriaClick"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imgCocteles"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/coctel" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/colorPrimary"
+                    android:gravity="center"
+                    android:tag="Cocteles"
+                    android:text="Coctel" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="8dp"
+                android:background="@color/vinoSuave"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:onClick="onCategoriaClick"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imgShots"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:contentDescription="Shots"
+                    android:src="@drawable/shot" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/colorPrimary"
+                    android:gravity="center"
+                    android:tag="Shots"
+                    android:text="Shots" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="8dp"
+                android:background="@color/vinoSuave"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:onClick="onCategoriaClick"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imgCerveza"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:contentDescription="Cervezas"
+                    android:src="@drawable/cerveza" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/colorPrimary"
+                    android:gravity="center"
+                    android:tag="Cervezas"
+                    android:text="Cervezas" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="8dp"
+                android:background="@color/vinoSuave"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:onClick="onCategoriaClick"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imgVino"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:contentDescription="Vinos"
+                    android:src="@drawable/vino" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/colorPrimary"
+                    android:gravity="center"
+                    android:tag="Vinos"
+                    android:text="Vinos" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="8dp"
+                android:background="@color/vinoSuave"
                 android:clickable="true"
                 android:focusable="true"
                 android:gravity="center"
@@ -76,54 +236,20 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:contentDescription="Sodas"
-                    android:src="@drawable/boquitas" />
+                    android:src="@drawable/boquita" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="?attr/colorPrimary"
                     android:gravity="center"
                     android:tag="Boquitas"
                     android:text="Boquitas" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center"
-                android:background="@color/blanco"
-                android:onClick="onCategoriaClick"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/imgCocteles"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:contentDescription="Cocteles"
-                    android:src="@drawable/admin" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:tag="Cocteles"
-                    android:text="Cocteles" />
-            </LinearLayout>
-
-
         </LinearLayout>
 
     </HorizontalScrollView>
-
-
-<!--    <Button-->
-<!--        android:id="@+id/btnCategoria"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="prueba"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/etBuscador"/>-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvListaMenuComandas"

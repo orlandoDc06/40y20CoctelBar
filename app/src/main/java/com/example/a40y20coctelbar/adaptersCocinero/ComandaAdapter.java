@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -127,7 +128,7 @@ public class ComandaAdapter extends RecyclerView.Adapter<ComandaAdapter.ComandaV
     public class ComandaViewHolder extends RecyclerView.ViewHolder {
         TextView lblNombreCliente, lblFechaComanda, lblEstadoComanda, lblTotalComanda;
         LinearLayout containerProductos;
-        ImageButton btnCompletarComanda;
+        Button btnCompletarComanda;
 
         public ComandaViewHolder(@NonNull View itemView) {
             super(itemView);

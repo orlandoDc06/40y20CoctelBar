@@ -125,13 +125,12 @@ public class MenuComanda extends AppCompatActivity {
 
     private void mostrarDialogoAgregar(Menu menu) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Agregar producto");
 
         View dialogView = getLayoutInflater().inflate(R.layout.mesero_dialog_agregar_producto, null);
         builder.setView(dialogView);
 
-        EditText etCantidad = dialogView.findViewById(R.id.etCantidad);
-        EditText etNota = dialogView.findViewById(R.id.etNota);
+        EditText etCantidad = dialogView.findViewById(R.id.editCantidad);
+        EditText etNota = dialogView.findViewById(R.id.editNota);
 
         builder.setPositiveButton("Agregar", (dialog, which) -> {
             String cantidadStr = etCantidad.getText().toString();

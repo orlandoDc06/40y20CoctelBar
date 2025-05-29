@@ -28,7 +28,6 @@ public class AdministradorMenu extends AppCompatActivity {
 
     CardView gestionUsersCards, menuProductsCard, reporteCard, visualizaReglasCard;
     private Button btnCerrarSesion;
-    TextView txtUsuario;
     private FirebaseAuth miAuth;
 
     @Override
@@ -41,7 +40,6 @@ public class AdministradorMenu extends AppCompatActivity {
         reporteCard = findViewById(R.id.cardReporte);
         visualizaReglasCard = findViewById(R.id.cardReglasNegocio);
         btnCerrarSesion = findViewById(R.id.btnCerrarSesion);
-        txtUsuario = findViewById(R.id.txtnombreUsuario);
 
         miAuth = FirebaseAuth.getInstance();
 

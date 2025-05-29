@@ -3,38 +3,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_margin="5dp"
     app:cardCornerRadius="12dp"
-    app:cardElevation="4dp">
+    app:cardElevation="8dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="15dp">
 
         <!-- Header de la comanda -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@color/vino"
-            android:padding="12dp"
-            android:layout_marginBottom="12dp">
+            android:background="?attr/colorPrimary"
+            android:padding="12dp">
 
             <TextView
                 android:id="@+id/lblNombreCliente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Cliente: Nombre del Cliente"
+                android:gravity="center"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                android:layout_marginBottom="5dp"
                 android:textColor="@android:color/white" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginBottom="5dp"
                 android:layout_marginTop="4dp">
 
                 <TextView
@@ -62,10 +64,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Total: $122.98"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
-                android:textColor="@android:color/white"
-                android:layout_marginTop="4dp" />
+                android:gravity=""
+                android:textColor="@android:color/white" />
 
         </LinearLayout>
 
@@ -76,7 +78,7 @@
             android:text="Productos:"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginTop="8dp" />
 
         <LinearLayout
             android:id="@+id/containerProductos"
@@ -85,15 +87,14 @@
             android:orientation="vertical" />
 
         <!-- Botón para completar comanda -->
-        <ImageButton
+        <Button
             android:id="@+id/btnCompletarComanda"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:background="@color/vino"
+            android:layout_marginTop="8dp"
+            android:background="?attr/colorPrimary"
             android:text="Completar Comanda"
-            android:padding="12dp"
-            app:srcCompat="@android:drawable/ic_menu_agenda" />
+            app:icon="@drawable/completar" />
 
     </LinearLayout>
 

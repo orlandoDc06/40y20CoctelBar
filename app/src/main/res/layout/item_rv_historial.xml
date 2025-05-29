@@ -1,72 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_margin="20dp"
-    android:padding="20dp">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:padding="8dp"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="8dp">
 
-    <TextView
-        android:id="@+id/lblKey"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Codigo orden"
-        android:textSize="20dp"
-        android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/lblFecha"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Fecha"
-        android:textSize="20dp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/lvlNombreCliente"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="nombre cliente"
-        android:textSize="20dp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/lblEstado"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Estado"
-        android:textSize="20dp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/lblSubtotal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Subtotal"
-        android:textSize="20dp"
-        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/imgBtnHistorialComandaEdit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/add" />
+        <View
+            android:id="@+id/linea"
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:background="?attr/colorPrimary" />
 
-        <ImageButton
-            android:id="@+id/imgBtnHistorialComandaDelete"
-            android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/delete" />
+            android:padding="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/lblKey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Codigo orden"
+                android:gravity="center"
+                android:layout_marginBottom="5dp"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/lblEstado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/oro"
+                android:textColor="@color/white"
+                android:text="Categoria"
+                android:layout_marginBottom="5dp"
+                android:padding="5dp"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/lvlNombreCliente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="nombre cliente"
+                android:layout_marginBottom="5dp"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/lblFecha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fecha"
+                android:layout_marginBottom="5dp"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/lblSubtotal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="Subtotal"
+                android:textSize="20sp"
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/negro"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/imgBtnHistorialComandaEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="?attr/colorPrimary"
+                    app:tint="@color/blanco"
+                    app:srcCompat="@drawable/edit" />
+
+                <ImageButton
+                    android:id="@+id/imgBtnHistorialComandaDelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:tint="@color/blanco"
+                    android:backgroundTint="?attr/colorPrimary"
+                    app:srcCompat="@drawable/delete" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
     </LinearLayout>
 
 
-</LinearLayout>
+
+</androidx.cardview.widget.CardView>

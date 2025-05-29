@@ -2,13 +2,37 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="15dp"
     android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/editNombreCliente"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nombre del cliente" />
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="?attr/colorPrimary"
+        android:text="Editar Comanda"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/clienteLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:hint="Nombre cliente"
+        app:startIconDrawable="@android:drawable/ic_input_get"
+        app:boxStrokeColor="@color/vino"
+        app:hintTextColor="@color/vino">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editNombreCliente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:autofillHints="emailAddress" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvProductosEditar"
@@ -19,13 +43,19 @@
         android:id="@+id/txtSubtotal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Subtotal: $0.00"
-        android:paddingTop="8dp"/>
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:layout_marginTop="5dp"
+        android:gravity="right"
+        android:text="Subtotal: $0.00" />
 
     <Button
         android:id="@+id/btnGuardarCambios"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
         android:text="Guardar cambios" />
 
 </LinearLayout>

@@ -6,26 +6,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20dp"
     tools:context=".OpcionesMesero.CrearComanda">
 
     <TextView
         android:id="@+id/lblTitulo"
         android:text="Nueva Orden"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         android:gravity="center"
-        android:textColor="@color/vino"
-        android:layout_marginTop="16dp"
+        android:fontFamily="cursive"
+        android:background="?attr/colorPrimary"
+        android:textColor="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="70dp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/clienteLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_margin="10dp"
         android:hint="Nombre cliente"
         app:startIconDrawable="@android:drawable/ic_input_get"
         app:boxStrokeColor="@color/vino"
@@ -41,12 +40,17 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_carritoCompras"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="450dp"/>
+        android:layout_height="match_parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:orientation="horizontal">
 
         <TextView
@@ -76,9 +80,9 @@
     <Button
         android:id="@+id/btnFinalizarComanda"
         android:text="Enviar a cocina"
-        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
         android:backgroundTint="@color/vino"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
 

@@ -80,7 +80,7 @@ public class CrearComanda extends AppCompatActivity {
             }
         });
 
-        rvCarrito.setLayoutManager(new GridLayoutManager(this, 2));
+        rvCarrito.setLayoutManager(new LinearLayoutManager(this));;
         rvCarrito.setAdapter(adapter);
 
 
@@ -102,7 +102,7 @@ public class CrearComanda extends AppCompatActivity {
             }
         }
 
-        tvTotal.setText("Total: $" + total);
+        tvTotal.setText("Total: $" + String.format("%.2f", total));
         double totalFinal = total;
 
         btnCrearComanda.setOnClickListener(v -> {
@@ -145,7 +145,7 @@ public class CrearComanda extends AppCompatActivity {
                 Toast.makeText(this, "Error en formato del precio", Toast.LENGTH_SHORT).show();
             }
         }
-        tvTotal.setText("Total: $" + total);
+        tvTotal.setText("Total: $" + String.format("%.2f", total));
     }
 
     private void mostrarDialogoEditarProducto(ProductosComanda producto, int position) {
@@ -155,8 +155,8 @@ public class CrearComanda extends AppCompatActivity {
         View dialogView = LayoutInflater.from(this).inflate(R.layout.mesero_dialog_agregar_producto, null);
         builder.setView(dialogView);
 
-        EditText etCantidad = dialogView.findViewById(R.id.etCantidad);
-        EditText etNota = dialogView.findViewById(R.id.etNota);
+        EditText etCantidad = dialogView.findViewById(R.id.editCantidad);
+        EditText etNota = dialogView.findViewById(R.id.editNota);
 
         etCantidad.setText(String.valueOf(producto.getCantidad()));
         etNota.setText(producto.getNota());

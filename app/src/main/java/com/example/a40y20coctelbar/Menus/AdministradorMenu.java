@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -21,10 +22,13 @@ import com.example.a40y20coctelbar.OpcionesAdministrador.Reporte;
 import com.example.a40y20coctelbar.R;
 import com.google.firebase.auth.FirebaseAuth;
 
+import org.w3c.dom.Text;
+
 public class AdministradorMenu extends AppCompatActivity {
 
     CardView gestionUsersCards, menuProductsCard, reporteCard, visualizaReglasCard;
     private Button btnCerrarSesion;
+    TextView txtUsuario;
     private FirebaseAuth miAuth;
 
     @Override
@@ -37,8 +41,10 @@ public class AdministradorMenu extends AppCompatActivity {
         reporteCard = findViewById(R.id.cardReporte);
         visualizaReglasCard = findViewById(R.id.cardReglasNegocio);
         btnCerrarSesion = findViewById(R.id.btnCerrarSesion);
+        txtUsuario = findViewById(R.id.txtnombreUsuario);
 
         miAuth = FirebaseAuth.getInstance();
+
 
 
         gestionUsersCards.setOnClickListener(new View.OnClickListener() {

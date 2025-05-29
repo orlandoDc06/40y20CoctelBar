@@ -1,62 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="20dp"
-    android:padding="20dp">
-
-    <ImageView
-        android:id="@+id/imgItemUsuario"
-        android:layout_width="270dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        tools:srcCompat="@tools:sample/avatars" />
+    android:layout_margin="5dp"
+    android:elevation="20dp"
+    android:padding="10dp">
 
     <LinearLayout
-        android:layout_width="180dp"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/lblItemNombre"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Nombre"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+        <View
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:background="?attr/colorPrimary" />
 
-        <TextView
-            android:id="@+id/lblItemRol"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="20dp"
-            android:text="Rol" />
-
+        <ImageView
+            android:id="@+id/imgItemUsuario"
+            android:layout_width="100dp"
+            android:layout_height="110dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            tools:srcCompat="@tools:sample/avatars" />
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_width="250dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp">
 
-            <ImageButton
-                android:id="@+id/imgItemEdit"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/lblItemNombre"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/edit" />
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="Nombre"
+                android:textSize="16dp"
+                android:textStyle="bold" />
 
-            <ImageButton
-                android:id="@+id/imgItemDelete"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/lblItemRol"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/delete" />
+                android:layout_marginBottom="15dp"
+                android:gravity="center"
+                android:text="Rol"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/imgItemEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    app:srcCompat="@drawable/edit"
+                    android:background="@android:color/transparent"
+                    app:tint="?attr/colorPrimary" />
+
+                <ImageButton
+                    android:id="@+id/imgItemDelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/delete"
+                    android:background="@android:color/transparent"
+                    app:tint="?attr/colorPrimary" />
+            </LinearLayout>
+
+
         </LinearLayout>
-
 
     </LinearLayout>
 
 
-</LinearLayout>
+
+</androidx.cardview.widget.CardView>

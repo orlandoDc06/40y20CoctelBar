@@ -2,6 +2,7 @@ package com.example.a40y20coctelbar.adaptersMesero;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +50,23 @@ public class HistorialComandaAdapter extends RecyclerView.Adapter<HistorialComan
         holder.lblFecha.setText("Fecha: " + comanda.getFecha());
         holder.lblNombreCliente.setText("Cliente: " + comanda.getNombreCliente());
         holder.lblEstado.setText("Estado: " + comanda.getEstadoComanda());
-        holder.lblSubtotal.setText("Total: $" + comanda.getTotalPagar());
+
+        if (comanda.getEstadoComanda().equalsIgnoreCase("listo")) {
+            holder.lblEstado.setBackgroundColor(Color.parseColor("#4CAF50"));
+            holder.linea.setBackgroundColor(Color.parseColor("#4CAF50"));
+        } else if (comanda.getEstadoComanda().equalsIgnoreCase("en preparación")) {
+            holder.lblEstado.setBackgroundResource(R.color.oro);
+            holder.linea.setBackgroundResource(R.color.oro);
+        } else if (comanda.getEstadoComanda().equalsIgnoreCase("pendiente")) {
+            holder.lblEstado.setBackgroundColor(Color.parseColor("#BDBDBD"));
+            holder.linea.setBackgroundColor(Color.parseColor("#BDBDBD"));
+        } else {
+            holder.lblEstado.setBackgroundColor(Color.RED);
+        }
+
+        Double var = Double.parseDouble(comanda.getTotalPagar());
+        holder.lblSubtotal.setText("Total: $" + String.format("%.2f", var));
+
 
         holder.btnEditar.setOnClickListener(v -> {
             mostrarDialogoEditar(comanda, holder.getAdapterPosition());
@@ -92,6 +109,7 @@ public class HistorialComandaAdapter extends RecyclerView.Adapter<HistorialComan
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView lblKey, lblFecha, lblNombreCliente, lblEstado, lblSubtotal;
         ImageButton btnEliminar, btnEditar;
+        View linea;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -103,6 +121,7 @@ public class HistorialComandaAdapter extends RecyclerView.Adapter<HistorialComan
             lblSubtotal = itemView.findViewById(R.id.lblSubtotal);
             btnEliminar = itemView.findViewById(R.id.imgBtnHistorialComandaDelete);
             btnEditar = itemView.findViewById(R.id.imgBtnHistorialComandaEdit);
+            linea = itemView.findViewById(R.id.linea);
         }
     }
 

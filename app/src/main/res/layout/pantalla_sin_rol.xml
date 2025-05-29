@@ -50,6 +50,16 @@
         android:layout_marginTop="10dp"
         android:text="El administrador aun no te asigna un rol" />
 
+    <Button
+        android:id="@+id/btnCerrarSesion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:backgroundTint="?attr/colorPrimary"
+        android:textColor="@color/white"
+        android:text="@string/logout"/>
+
 
 
 </LinearLayout>

@@ -11,6 +11,7 @@ public class Comanda implements Serializable {
     private String estadoComanda;
     private String mesero;
     private String totalPagar;
+    private String foto;
 
     public Comanda() {
     }

@@ -23,21 +23,27 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/lblNombrePlatillo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:text="Nombre"
-                android:textSize="12dp" />
+                android:textSize="16dp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/lblDescripcionPlatillo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:justificationMode="inter_word"
+                android:layout_marginTop="5dp"
                 android:text="Descripcion"
                 android:textSize="12dp" />
 
@@ -47,6 +53,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="precio"
+                android:layout_marginTop="5dp"
                 android:textSize="12dp"
                 android:textStyle="bold"/>
 
@@ -55,9 +62,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="@color/oro"
+                android:background="@color/azul"
                 android:textColor="@color/white"
                 android:text="Categoria"
+                android:layout_marginTop="5dp"
                 android:padding="5dp"
                 android:textSize="12dp"
                 android:textStyle="bold"/>

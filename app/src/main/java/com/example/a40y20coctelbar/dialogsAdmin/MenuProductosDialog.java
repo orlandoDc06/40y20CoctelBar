@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -51,11 +52,9 @@ public class MenuProductosDialog extends DialogFragment {
 
     private ImageView imgFotoPlatillo;
     private Button btnSeleccionarImagen;
-    private EditText etNombrePlatillo;
-    private EditText etDescripcionPlatillo;
-    private EditText etPrecioPlatillo;
+    private EditText etNombrePlatillo, etDescripcionPlatillo, etPrecioPlatillo;
     private Button btnGuardar;
-    private Button btnCancelar;
+    private TextView btnCancelar;
     private Spinner spCategoriaPlatillo;
 
     private Uri imageUri;

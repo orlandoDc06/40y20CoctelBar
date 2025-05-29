@@ -69,7 +69,11 @@ public class HistorialComandaAdapter extends RecyclerView.Adapter<HistorialComan
 
 
         holder.btnEditar.setOnClickListener(v -> {
-            mostrarDialogoEditar(comanda, holder.getAdapterPosition());
+            if ("Pendiente".equalsIgnoreCase(comanda.getEstadoComanda())) {
+                mostrarDialogoEditar(comanda, holder.getAdapterPosition());}
+            else {
+                Toast.makeText(context, "Esta comanda ya se está preparando, habla con cocina para editarla.", Toast.LENGTH_LONG).show();
+            }
         });
 
         holder.btnEliminar.setOnClickListener(v -> {

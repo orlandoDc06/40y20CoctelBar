@@ -24,7 +24,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
 
-public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder> {
+public class    MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder> {
 
     private Context context;
     private List<Menu> menuList;

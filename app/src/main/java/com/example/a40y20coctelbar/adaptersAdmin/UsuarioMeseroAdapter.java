@@ -58,7 +58,7 @@ public class UsuarioMeseroAdapter extends RecyclerView.Adapter<UsuarioMeseroAdap
         String nombreMostrar = usuario.getNombre();
         if (nombreMostrar == null || nombreMostrar.isEmpty()) {
             if (usuario.getCorreo() != null && !usuario.getCorreo().isEmpty()) {
-                // Extraer nombre del correo (parte antes del @)
+                // Extraer nombre del correo
                 nombreMostrar = usuario.getCorreo().substring(0, usuario.getCorreo().indexOf("@"));
             } else {
                 nombreMostrar = "Usuario";
@@ -75,7 +75,7 @@ public class UsuarioMeseroAdapter extends RecyclerView.Adapter<UsuarioMeseroAdap
 
         // Configurar imagen de perfil
         if (usuario.getPp() != null && !usuario.getPp().isEmpty()) {
-            // Usar Glide para cargar la imagen desde URL
+            // Glide para cargar la imagen
             Glide.with(context)
                     .load(usuario.getPp())
                     .placeholder(R.drawable.ic_launcher_foreground)

@@ -75,7 +75,7 @@ public class MenuProductos extends AppCompatActivity {
     }
 
     private void cargarMenuDesdeFirebase() {
-        // Crear el listener una sola vez
+
         menuValueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

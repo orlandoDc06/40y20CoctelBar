@@ -105,8 +105,14 @@ public class Reporte extends AppCompatActivity {
 
                 // Mostrar comanda mas alta
                 String ventaAlta = obtenerVentaMasAltaDelDia(comandasDelDia, fechaHoy);
-                txtMayorVenta.setText(ventaAlta.substring(0, 20));
-                txtMayorVentaValor.setText("$ " + ventaAlta.substring(20));
+                String[] partes = ventaAlta.split("\\|");
+                if (partes.length == 2) {
+                    txtMayorVenta.setText(partes[0]); 
+                    txtMayorVentaValor.setText("$ " + partes[1]);
+                } else {
+                    txtMayorVenta.setText("Sin datos");
+                    txtMayorVentaValor.setText("$ 0.00");
+                }
 
                 // Hora pico
                 String horaPico = obtenerHoraPicoDelDia(comandasDelDia, fechaHoy);
@@ -220,8 +226,8 @@ public class Reporte extends AppCompatActivity {
 
     private String obtenerVentaMasAltaDelDia(List<Comanda> comandas, String fechaActual) {
         double ventaMaxima = 0.0;
-        String detalleVenta = "N/A";
-        String valorVenta = "N/A";
+        String detalleVenta = "Sin ventas";
+        String valorVenta = "0.00";
 
         for (Comanda comanda : comandas) {
             if (comanda.getFecha().startsWith(fechaActual)) {
@@ -231,7 +237,6 @@ public class Reporte extends AppCompatActivity {
                         ventaMaxima = total;
 
                         String keySinPrefijo = comanda.getKey().substring(8);
-                        // Puedes incluir más detalles si deseas
                         detalleVenta = "Orden #" + keySinPrefijo;
                         valorVenta = String.format("%.2f", total);
                     }
@@ -241,7 +246,7 @@ public class Reporte extends AppCompatActivity {
             }
         }
 
-        return detalleVenta + valorVenta;
+        return detalleVenta + "|" + valorVenta;
     }
 
     private String obtenerHoraPicoDelDia(List<Comanda> comandas, String fechaActual) {

@@ -45,7 +45,7 @@ public class AuthManager {
         void alExitoAutenticacion(FirebaseUser user, String rol);
         void alErrorAutenticacion(String error);
         void alEnviarVerificacionEmail();
-        void alCancelarAutenticacion(); // Agregar método para cancelación
+        void alCancelarAutenticacion();
     }
 
     public AuthManager(Context context, CallbackAutenticacion callback) {
@@ -82,14 +82,14 @@ public class AuthManager {
                                     });
                         }
 
-                        // Ejecutar Toast en el hilo principal
+
                         mainHandler.post(() -> {
                             Toast.makeText(context, "Usuario creado correctamente", Toast.LENGTH_SHORT).show();
                         });
                     } else {
                         String error = task.getException() != null ?
                                 task.getException().getMessage() : "Error desconocido";
-                        authCallback.alErrorAutenticacion("Fallo en la creación: " + error);
+                        authCallback.alErrorAutenticacion("Fallo en la creación: ");
                     }
                 });
     }
@@ -154,18 +154,16 @@ public class AuthManager {
     }
 
     private void manejarErrorGoogle(GetCredentialException e) {
-        Log.e(TAG, "Credential fetch failed: " + e.getMessage(), e);
 
         if (e instanceof GetCredentialCancellationException) {
-            // Usuario canceló - no mostrar error
-            Log.d(TAG, "Usuario canceló la autenticación con Google");
+
             if (authCallback != null) {
                 authCallback.alCancelarAutenticacion();
             }
         } else if (e instanceof NoCredentialException) {
             authCallback.alErrorAutenticacion("No hay cuentas de Google disponibles");
         } else {
-            authCallback.alErrorAutenticacion("Error con Google Sign-In: " + e.getMessage());
+            authCallback.alErrorAutenticacion("Error al inicar sesion");
         }
     }
 
@@ -181,8 +179,7 @@ public class AuthManager {
                             GoogleIdTokenCredential.createFrom(credentialData);
                     autenticarFirebaseConGoogle(googleIdTokenCredential.getIdToken());
                 } catch (Exception e) {
-                    Log.e(TAG, "Error al procesar credencial de Google: " + e.getMessage(), e);
-                    authCallback.alErrorAutenticacion("Error al procesar credencial de Google");
+                    authCallback.alErrorAutenticacion("Error al procesar ");
                 }
             } else {
                 authCallback.alErrorAutenticacion("Tipo de credencial no soportado");
@@ -205,7 +202,7 @@ public class AuthManager {
                         Log.d(TAG, "USUARIO REGISTRADO CON GOOGLE");
                         FirebaseUser user = firebaseAuth.getCurrentUser();
                         if (user != null) {
-                            // CAMBIO IMPORTANTE: Verificar si el usuario ya existe antes de guardarlo
+                            // Verificar si el usuario ya existe antes de guardarlo
                             verificarYGuardarUsuarioGoogle(user);
                         }
                     } else {
@@ -217,15 +214,13 @@ public class AuthManager {
                 });
     }
 
-    // NUEVO MÉTODO: Verifica si el usuario existe antes de guardarlo
     private void verificarYGuardarUsuarioGoogle(FirebaseUser user) {
         String userId = user.getUid();
         databaseReference.child("usuarios").child(userId).get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         if (task.getResult().exists()) {
-                            // El usuario ya existe, solo obtener el rol y navegar
-                            Log.d(TAG, "Usuario existente encontrado, no se sobrescribirán los datos");
+                            // si usuario ya existe, solo obtener el rol y navegar
                             obtenerRolUsuarioYNavegar(user);
                         } else {
                             // Usuario nuevo, guardarlo con rol por defecto
@@ -234,8 +229,6 @@ public class AuthManager {
                             obtenerRolUsuarioYNavegar(user);
                         }
                     } else {
-                        Log.e(TAG, "Error al verificar si el usuario existe: " + task.getException());
-                        // En caso de error, intentar obtener el rol (por si existe)
                         obtenerRolUsuarioYNavegar(user);
                     }
                 });

@@ -75,6 +75,8 @@ dependencies {
     // Firebase Cloud Messaging
     implementation 'com.google.firebase:firebase-messaging:23.4.0'
 
+    // Firebase Functions (para Cloud Functions)
+    implementation 'com.google.firebase:firebase-functions:20.4.0'
 
 }
 

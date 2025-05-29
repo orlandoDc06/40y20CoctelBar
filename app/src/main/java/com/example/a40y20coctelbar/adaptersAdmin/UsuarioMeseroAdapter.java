@@ -18,12 +18,20 @@ import com.bumptech.glide.Glide;
 import com.example.a40y20coctelbar.R;
 import com.example.a40y20coctelbar.dialogsAdmin.MeseroDialog;
 import com.example.a40y20coctelbar.models.Usuario;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.functions.FirebaseFunctions;
+import com.google.firebase.functions.HttpsCallableResult;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UsuarioMeseroAdapter extends RecyclerView.Adapter<UsuarioMeseroAdapter.UsuarioViewHolder> {
 
@@ -92,7 +100,7 @@ public class UsuarioMeseroAdapter extends RecyclerView.Adapter<UsuarioMeseroAdap
             }
         });
 
-        // ELIMINAR USUARIO (opcional - puedes implementar esta funcionalidad también)
+        // ELIMINAR USUARIO
         holder.imgItemDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,13 +124,15 @@ public class UsuarioMeseroAdapter extends RecyclerView.Adapter<UsuarioMeseroAdap
     private void eliminarUsuario(Usuario usuario, int position) {
         if (usuario.getKey() != null) {
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+
+            // Primero eliminamos de Realtime Database
             databaseReference.child("usuarios").child(usuario.getKey())
                     .removeValue()
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Toast.makeText(context, "Usuario eliminado correctamente", Toast.LENGTH_SHORT).show();
-                            // El listener en el Fragment actualizará automáticamente la lista
+                            // Después eliminamos de Authentication si tenemos el UID
+                            eliminarDeAuthentication(usuario);
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -132,6 +142,40 @@ public class UsuarioMeseroAdapter extends RecyclerView.Adapter<UsuarioMeseroAdap
                         }
                     });
         }
+    }
+
+    private void eliminarDeAuthentication(Usuario usuario) {
+        // Como no tienes UID en tu modelo, usamos Cloud Function con el email
+        if (usuario.getCorreo() != null && !usuario.getCorreo().isEmpty()) {
+            eliminarConCloudFunction(usuario.getCorreo(), "email");
+        } else {
+            Toast.makeText(context, "Usuario eliminado de la base de datos únicamente", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void eliminarConCloudFunction(String identifier, String type) {
+        // Llamar a una Cloud Function que elimine el usuario
+        FirebaseFunctions functions = FirebaseFunctions.getInstance();
+
+        Map<String, Object> data = new HashMap<>();
+        if (type.equals("email")) {
+            data.put("email", identifier);
+        } else {
+            data.put("uid", identifier);
+        }
+
+        functions.getHttpsCallable("eliminarUsuario")
+                .call(data)
+                .addOnCompleteListener(new OnCompleteListener<HttpsCallableResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<HttpsCallableResult> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(context, "Usuario eliminado completamente", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(context, "Usuario eliminado de la base de datos, pero hubo un error al eliminarlo de Authentication: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
     }
 
     @Override

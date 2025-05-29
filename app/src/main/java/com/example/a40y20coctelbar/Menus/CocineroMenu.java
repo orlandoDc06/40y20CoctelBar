@@ -68,7 +68,7 @@ public class CocineroMenu extends AppCompatActivity {
         btnCerrarSesion = findViewById(R.id.btnCerrarSesion);
         recyclerView = findViewById(R.id.rcvComandaCocinero);
 
-        // Inicializar Firebase Database
+        // Inicializar Database
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
         // Inicializar lista
@@ -92,19 +92,17 @@ public class CocineroMenu extends AppCompatActivity {
                     try {
                         Comanda comanda = comandaSnapshot.getValue(Comanda.class);
                         if (comanda != null) {
-                            // Establecer el ID de la comanda desde la key de Firebase
+                            // Establecer el ID de la comanda desde la key
                             comanda.setKey(comandaSnapshot.getKey());
 
                             // Solo mostrar comandas que no estén en estado "Listo"
                             String estado = comanda.getEstadoComanda();
-                            if (estado != null &&
-                                    !estado.equalsIgnoreCase("listo") &&
-                                    !estado.equalsIgnoreCase("completada")) {
+                            if (estado != null && !estado.equalsIgnoreCase("listo")) {
                                 listaComandas.add(comanda);
                             }
                         }
                     } catch (Exception e) {
-                        Log.e("CocineroMenu", "Error al parsear comanda: " + e.getMessage());
+                        Log.e("CocineroMenu", "Error: " + e.getMessage());
                     }
                 }
 

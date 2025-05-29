@@ -95,7 +95,7 @@ public class EditarComandaDialog extends DialogFragment {
 
     private void setupSpinner() {
         // Crear array de estados
-        String[] estados = {"Pendiente", "En preparación", "Listo", "Incidencia"};
+        String[] estados = {"Pendiente", "En preparación", "Listo"};
 
         // Crear adapter para el spinner
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),

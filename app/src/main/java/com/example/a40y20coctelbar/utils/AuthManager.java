@@ -113,7 +113,7 @@ public class AuthManager {
                     } else {
                         String error = task.getException() != null ?
                                 task.getException().getMessage() : "Error desconocido";
-                        authCallback.alErrorAutenticacion("Error inicio sesión: " + error);
+                        authCallback.alErrorAutenticacion("Error inicio sesión ");
                     }
                 });
     }

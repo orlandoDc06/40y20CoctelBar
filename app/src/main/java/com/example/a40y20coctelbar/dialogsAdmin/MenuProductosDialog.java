@@ -123,13 +123,10 @@ public class MenuProductosDialog extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.admin_dialog_menu_productos, container, false);
 
-        //Inicializar vistas
         AsociarElementosXml(view);
 
-        //Configurar el spinner
         setupSpinner();
 
-        //Si estamos en modo edición, cargar
         if (modeEdit && menuEdit != null) {
             CargarDatosExistentes();
         }

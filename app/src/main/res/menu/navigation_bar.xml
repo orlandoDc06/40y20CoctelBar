@@ -3,22 +3,22 @@
 
     <item
         android:id="@+id/nav_meseros"
-        android:icon="@drawable/admin"
+        android:icon="@drawable/mesero"
         android:title="Meseros" />
 
     <item
         android:id="@+id/nav_cocineros"
-        android:icon="@drawable/admin"
+        android:icon="@drawable/cocinero"
         android:title="Cocineros" />
 
     <item
         android:id="@+id/nav_administradores"
-        android:icon="@drawable/admin"
+        android:icon="@drawable/administrador"
         android:title="Administradores" />
 
     <item
         android:id="@+id/nav_pendientes"
-        android:icon="@drawable/admin"
+        android:icon="@drawable/pendiente"
         android:title="Pendientes" />
 
 

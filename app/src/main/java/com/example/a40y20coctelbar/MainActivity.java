@@ -106,8 +106,6 @@ public class MainActivity extends AppCompatActivity implements AuthManager.Callb
 
     @Override
     public void alCancelarAutenticacion() {
-        // Este método se llama cuando el usuario cancela la autenticación con Google
-        // Puedes mostrar un mensaje o simplemente no hacer nada
         Toast.makeText(this, "Autenticación cancelada", Toast.LENGTH_SHORT).show();
     }
 }

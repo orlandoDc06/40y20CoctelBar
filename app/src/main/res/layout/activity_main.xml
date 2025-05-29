@@ -33,9 +33,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
             android:layout_marginBottom="60dp"
+            android:fontFamily="cursive"
             android:text="Inicia Sesión"
             android:textColor="@color/white"
-            android:textSize="28sp"
+            android:textSize="30sp"
             android:textStyle="bold" />
 
         <!-- Email -->
@@ -47,8 +48,8 @@
             android:layout_marginTop="20dp"
             android:hint="Email"
             app:startIconDrawable="@android:drawable/ic_dialog_email"
-            app:boxStrokeColor="@color/vino"
-            app:hintTextColor="@color/vino">
+            app:boxStrokeColor="?attr/colorPrimary"
+            app:hintTextColor="?attr/colorPrimary">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtEmail"
@@ -58,17 +59,19 @@
                 android:autofillHints="emailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
+
+
         <!-- Password -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/passwordLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="12dp"
             android:hint="Contraseña"
             app:endIconMode="password_toggle"
             app:startIconDrawable="@android:drawable/ic_lock_idle_lock"
-            app:boxStrokeColor="@color/vino"
-            app:hintTextColor="@color/vino">
+            app:boxStrokeColor="?attr/colorPrimary"
+            app:hintTextColor="?attr/colorPrimary">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtPassword"
@@ -77,16 +80,16 @@
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Olvidó contraseña -->
-        <TextView
-            android:id="@+id/tvForgotPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginBottom="24dp"
-            android:text="Forgot password?"
-            android:textColor="@color/vino"
-            android:textSize="14sp" />
+<!--        &lt;!&ndash; Olvidó contraseña &ndash;&gt;-->
+<!--        <TextView-->
+<!--            android:id="@+id/tvForgotPassword"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="end"-->
+<!--            android:layout_marginBottom="24dp"-->
+<!--            android:text="Forgot password?"-->
+<!--            android:textColor="?attr/colorPrimary"-->
+<!--            android:textSize="14sp" />-->
 
         <!-- Botón Login -->
         <com.google.android.material.button.MaterialButton
@@ -97,7 +100,7 @@
             android:text="Iniciar sesión"
             android:textColor="@color/blanco"
             android:textStyle="bold"
-            app:backgroundTint="@color/vino"
+            app:backgroundTint="?attr/colorPrimary"
             app:cornerRadius="14dp" />
 
         <!-- Separador OR -->
@@ -135,5 +138,6 @@
 
     </LinearLayout>
 
+<!--    android:background="#1064171e"-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

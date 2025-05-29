@@ -17,12 +17,28 @@
             android:id="@+id/frameLayaout"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:background="@color/vino"
+            android:background="?attr/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
+            <Button
+                android:id="@+id/btnCerrarSesion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:backgroundTint="?attr/colorPrimary"
+                android:textColor="@color/white"
+                app:icon="@drawable/out"
+                app:iconTint="@color/white"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                android:text="Cerrar Sesion" />
+
+
+
             <TextView
-                android:id="@+id/txtnombreUsuario"
+                android:id="@+id/txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="18dp"
@@ -33,7 +49,7 @@
                 android:textSize="30sp"
                 android:textStyle="bold"/>
             <TextView
-                android:id="@+id/txtTexto"
+                android:id="@+id/txtnombreUsuario"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="18dp"
@@ -42,22 +58,23 @@
                 android:textColor="@color/white"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
+
             <ImageView
                 android:id="@+id/imagenUser"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                app:srcCompat="@drawable/admin"
-                app:tint="@color/oro"
-                android:layout_marginEnd="18dp"
+                android:layout_gravity="right"
                 android:layout_marginTop="60dp"
-                android:layout_gravity="right"/>
+                android:layout_marginEnd="18dp"
+                app:srcCompat="@drawable/people"
+                app:tint="@color/white" />
         </FrameLayout>
 
         <!--    Row 1-->
         <LinearLayout
             android:id="@+id/row1"
             android:layout_width="0dp"
-            android:layout_height="175dp"
+            android:layout_height="190dp"
             android:orientation="horizontal"
             android:padding="15dp"
             app:layout_constraintHorizontal_bias="0.0"
@@ -66,9 +83,9 @@
             app:layout_constraintTop_toBottomOf="@id/frameLayaout">
 
 
-            <!--    Card 1-->
+
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardCrearComanda"
+                android:id="@+id/cardMenuProductos"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
@@ -78,26 +95,28 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="@color/white">
 
                     <TextView
-                        android:id="@+id/cardNombreCC"
+                        android:id="@+id/cardNombreMenu"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Nuevo Pedido"
+                        android:text="Menu"
                         android:textSize="15sp"
-                        android:textColor="@color/vino"
+                        android:textColor="?attr/colorPrimary"
                         android:layout_marginTop="10dp"
                         android:layout_centerHorizontal="true"
-                        android:layout_below="@id/cardImageGU"/>
+                        android:layout_below="@id/cardImageMenu"/>
 
-                    <ImageView
-                        android:id="@+id/cardImageGU"
+                    <pl.droidsonroids.gif.GifImageView
+                        android:layout_marginTop="20dp"
+                        android:id="@+id/cardImageMenu"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@drawable/admin"
-                        android:layout_marginTop="15dp"
-                        android:layout_centerHorizontal="true"/>
+                        android:layout_gravity="center"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/menu" />
 
                 </RelativeLayout>
 
@@ -107,52 +126,13 @@
             </androidx.cardview.widget.CardView>
 
 
-            <!--            <androidx.cardview.widget.CardView-->
-            <!--                android:id="@+id/cardReporte"-->
-            <!--                android:layout_width="0dp"-->
-            <!--                android:layout_height="match_parent"-->
-            <!--                android:layout_margin="10dp"-->
-            <!--                android:layout_weight="1"-->
-            <!--                app:cardElevation="5dp"-->
-            <!--                app:cardCornerRadius="20dp">-->
-
-            <!--                <RelativeLayout-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="match_parent">-->
-
-            <!--                    <TextView-->
-            <!--                        android:id="@+id/cardNombreReporte"-->
-            <!--                        android:layout_width="wrap_content"-->
-            <!--                        android:layout_height="wrap_content"-->
-            <!--                        android:text="Reporte"-->
-            <!--                        android:textSize="15sp"-->
-            <!--                        android:textColor="@color/vino"-->
-            <!--                        android:layout_marginTop="10dp"-->
-            <!--                        android:layout_centerHorizontal="true"-->
-            <!--                        android:layout_below="@id/cardImageReporte"/>-->
-
-            <!--                    <ImageView-->
-            <!--                        android:id="@+id/cardImageReporte"-->
-            <!--                        android:layout_width="70dp"-->
-            <!--                        android:layout_height="70dp"-->
-            <!--                        android:src="@drawable/admin"-->
-            <!--                        android:layout_marginTop="15dp"-->
-            <!--                        android:layout_centerHorizontal="true"/>-->
-
-            <!--                </RelativeLayout>-->
-
-
-
-
-            <!--            </androidx.cardview.widget.CardView>-->
-
         </LinearLayout>
 
         <!--    Row 2-->
         <LinearLayout
             android:id="@+id/row2"
             android:layout_width="0dp"
-            android:layout_height="175dp"
+            android:layout_height="190dp"
             android:orientation="horizontal"
             android:padding="20dp"
             android:layout_marginTop="20dp"
@@ -172,7 +152,8 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="@color/white">
 
                     <TextView
                         android:id="@+id/cardNombreMC"
@@ -180,18 +161,20 @@
                         android:layout_height="wrap_content"
                         android:text="Historial Comandas"
                         android:textSize="15sp"
-                        android:textColor="@color/vino"
+                        android:textColor="?attr/colorPrimary"
                         android:layout_marginTop="10dp"
                         android:layout_centerHorizontal="true"
                         android:layout_below="@id/cardImageRN"/>
 
-                    <ImageView
+
+                    <pl.droidsonroids.gif.GifImageView
+                        android:layout_marginTop="20dp"
                         android:id="@+id/cardImageRN"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@drawable/admin"
-                        android:layout_marginTop="15dp"
-                        android:layout_centerHorizontal="true"/>
+                        android:layout_gravity="center"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/historial" />
 
                 </RelativeLayout>
 
@@ -200,8 +183,9 @@
 
             </androidx.cardview.widget.CardView>
 
+            <!--    Card 1-->
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardMenuProductos"
+                android:id="@+id/cardCrearComanda"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
@@ -211,26 +195,28 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="@color/white">
 
                     <TextView
-                        android:id="@+id/cardNombreMenu"
+                        android:id="@+id/cardNombreCC"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Menu"
+                        android:text="Nuevo Pedido"
                         android:textSize="15sp"
-                        android:textColor="@color/vino"
+                        android:textColor="?attr/colorPrimary"
                         android:layout_marginTop="10dp"
                         android:layout_centerHorizontal="true"
-                        android:layout_below="@id/cardImageMenu"/>
+                        android:layout_below="@id/cardImageGU"/>
 
-                    <ImageView
-                        android:id="@+id/cardImageMenu"
+                    <pl.droidsonroids.gif.GifImageView
+                        android:layout_marginTop="20dp"
+                        android:id="@+id/cardImageGU"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@drawable/admin"
-                        android:layout_marginTop="15dp"
-                        android:layout_centerHorizontal="true"/>
+                        android:layout_gravity="center"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/comanda" />
 
                 </RelativeLayout>
 
@@ -239,12 +225,6 @@
 
             </androidx.cardview.widget.CardView>
 
-            <Button
-                android:id="@+id/btnCerrarSesion"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Cerra Sesion" />
 
         </LinearLayout>
 

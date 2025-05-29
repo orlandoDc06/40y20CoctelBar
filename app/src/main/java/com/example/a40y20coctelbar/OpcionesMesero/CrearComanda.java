@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -79,7 +80,7 @@ public class CrearComanda extends AppCompatActivity {
             }
         });
 
-        rvCarrito.setLayoutManager(new LinearLayoutManager(this));
+        rvCarrito.setLayoutManager(new GridLayoutManager(this, 2));
         rvCarrito.setAdapter(adapter);
 
 
@@ -176,11 +177,7 @@ public class CrearComanda extends AppCompatActivity {
             producto.setNota(notaStr);
 
             // Actualizar Adapter
-            RecyclerView rvCarrito = findViewById(R.id.rv_carritoCompras);
-            RecyclerView.Adapter adapter = rvCarrito.getAdapter();
-            if (adapter != null) {
-                adapter.notifyItemChanged(position);
-            }
+            adapter.notifyItemChanged(position);
 
             recalcularTotal();
         });
@@ -190,9 +187,5 @@ public class CrearComanda extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
-
-
-
 }
 

@@ -8,5 +8,7 @@
     <color name="azul">#2c3e50</color>
     <color name="oro">#edb647</color>
     <color name="vino">#64171e</color>
+    <color name="vinoClaro">#b0323c</color>
+    <color name="vinoSuave">#1064171e</color>
 
 </resources>

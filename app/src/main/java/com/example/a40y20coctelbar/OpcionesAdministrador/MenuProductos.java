@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,6 +22,7 @@ import com.example.a40y20coctelbar.R;
 import com.example.a40y20coctelbar.adaptersAdmin.MenuAdapter;
 import com.example.a40y20coctelbar.dialogsAdmin.MenuProductosDialog;
 import com.example.a40y20coctelbar.models.Menu;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,7 +36,7 @@ import java.util.List;
 
 public class MenuProductos extends AppCompatActivity {
 
-    private Button btnAbrirDialog;
+    private FloatingActionButton btnAbrirDialog;
     private RecyclerView recyclerMenuProductos;
     private MenuAdapter menuAdapter;
     private List<Menu> menuList;
@@ -68,7 +70,7 @@ public class MenuProductos extends AppCompatActivity {
     private void setupRecyclerView() {
         menuList = new ArrayList<>();
         menuAdapter = new MenuAdapter(this, menuList);
-        recyclerMenuProductos.setLayoutManager(new LinearLayoutManager(this));
+        recyclerMenuProductos.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerMenuProductos.setAdapter(menuAdapter);
     }
 

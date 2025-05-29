@@ -87,7 +87,6 @@ public class MainActivity extends AppCompatActivity implements AuthManager.Callb
         authManager.iniciarSesionConGoogle();
     }
 
-    // Implementación de AuthManager.CallbackAutenticacion
     @Override
     public void alExitoAutenticacion(FirebaseUser user, String rol) {
         NavigationManager.navegarSegunRol(this, user, rol);
